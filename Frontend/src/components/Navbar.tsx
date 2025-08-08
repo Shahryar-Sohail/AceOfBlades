@@ -7,6 +7,7 @@ import li4 from '../assets/li4.jpg'
 import li5 from '../assets/keyrings.jpg'
 import li6 from '../assets/knifecare.png'
 import li7 from '../assets/razor.jpg'
+import { Link } from 'react-router-dom'
 const Navbar = () => {
     return (
             <div className="navbar shadow-sm py-6 sticky top-8 z-50 bg-white">
@@ -18,7 +19,7 @@ const Navbar = () => {
                         <ul
                             tabIndex={0}
                             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-screen pr-10 -left-2 shadow text-xl">
-                        <li><a>Home</a></li>
+                        <li><Link to="/">Home</Link></li>
                         <li>
                             <details>
                                 <summary>AOB Collection</summary>
@@ -58,7 +59,7 @@ const Navbar = () => {
                                 </ul>
                             </details>
                         </li>
-                        <li><a>On Sale</a></li>
+                        <li><Link to="/sale">On Sale</Link></li>
                         <li><a>Articals</a></li>
                         <li><a>Gallery</a></li>
                         <li><a>Cart</a></li>
@@ -71,7 +72,7 @@ const Navbar = () => {
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1 text-xl font-semibold">
-                        <li><a>Home</a></li>
+                        <li><Link to="/">Home</Link></li>
                         <li>
                             <details>
                                 <summary>AOB Collection</summary>
@@ -111,7 +112,7 @@ const Navbar = () => {
                                 </ul>
                             </details>
                         </li>
-                        <li><a>On Sale</a></li>
+                        <li><Link to='/sale'>On Sale</Link></li>
                         <li><a>Articals</a></li>
                         <li><a>Gallery</a></li>
                         <li><a>Cart</a></li>

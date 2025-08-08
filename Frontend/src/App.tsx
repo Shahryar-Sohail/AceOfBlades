@@ -1,35 +1,25 @@
-
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import './App.css'
 import Banner from './components/Banner'
 import Footer from './components/Footer'
 import Navbar from './components/Navbar'
 import './index.css'
 import Home from './pages/Home'
-import Section2 from './sections/Section2'
-import Section3 from './sections/Section3'
-import Section4 from './sections/Section4'
-import Section5 from './sections/Section5'
-import Section6 from './sections/Section6'
-import Section7 from './sections/Section7'
-import Section8 from './sections/Section8'
+import Sale from './pages/Sale'
 
 function App() {
 
 
   return (
-    <>
-      <Banner/>
-      <Navbar/>
-      <Home/>
-      <Section2/>
-      <Section3/>
-      <Section4/>
-      <Section5/>
-      <Section6/>
-      <Section7/>
-      <Section8/>
-      <Footer/>
-    </>
+    <Router>
+      <Banner />
+      <Navbar />
+      <Routes>
+        <Route path='/' element={<Home />} />
+        <Route path='/sale' element={<Sale />} />
+      </Routes>
+      <Footer />
+    </Router>
   )
 }
 
