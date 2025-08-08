@@ -17,16 +17,54 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-                            <li><a>Item 1</a></li>
-                            <li>
-                                <a>Parent</a>
-                                <ul className="p-2">
-                                    <li><a>Submenu 1</a></li>
-                                    <li><a>Submenu 2</a></li>
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-screen pr-10 -left-2 shadow text-xl">
+                        <li><a>Home</a></li>
+                        <li>
+                            <details>
+                                <summary>AOB Collection</summary>
+                                <ul className="p-2 text-red-700 text-sm">
+                                    <li className='flex flex-row items-center'>
+                                        <img src={logoSmall} className='w-16' />
+                                        <a>Uncategorized22 products</a>
+                                    </li>
+                                    <li className='flex flex-row items-center'>
+                                        <img src={li2} className='w-24' />
+                                        <a>Collectors and knives33 products</a>
+                                    </li>
+                                    <li className='flex flex-row items-center'>
+                                        <img src={li3} className='w-24' />
+                                        <a>Fixed Blades</a>
+                                    </li>
+                                    <li className='flex flex-row items-center'>
+                                        <img src={li4} className='w-24' />
+                                        <a>Folding Knives1818 products</a>
+                                    </li>
+                                    <li className='flex flex-row items-center'>
+                                        <img src={li5} className='w-24' />
+                                        <a>Key Rings11 product</a>
+                                    </li>
+                                    <li className='flex flex-row items-center'>
+                                        <img src={li3} className='w-24' />
+                                        <a>Kitchen and chef knives2020 products</a>
+                                    </li>
+                                    <li className='flex flex-row items-center'>
+                                        <img src={li6} className='w-24' />
+                                        <a>Knife Care33 products</a>
+                                    </li>
+                                    <li className='flex flex-row items-center'>
+                                        <img src={li7} className='w-24' />
+                                        <a>Straight razors7</a>
+                                    </li>
                                 </ul>
-                            </li>
-                            <li><a>Item 3</a></li>
+                            </details>
+                        </li>
+                        <li><a>On Sale</a></li>
+                        <li><a>Articals</a></li>
+                        <li><a>Gallery</a></li>
+                        <li><a>Cart</a></li>
+                        <li><a>Checkout</a></li>
+                        <li><a>Contact US</a></li>
+                    
                         </ul>
                     </div>
                     <a className="btn btn-ghost w-32"><img src={logo} /></a>
