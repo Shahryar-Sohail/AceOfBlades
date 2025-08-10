@@ -6,10 +6,11 @@ import Navbar from './components/Navbar'
 import './index.css'
 import Home from './pages/Home'
 import Sale from './pages/Sale'
-import {app} from './firebase'
-import { getDatabase } from 'firebase/database'
+import Login from './pages/Login'
+// import {app} from './firebase'
+// import { getDatabase } from 'firebase/database'
 
-const db = getDatabase(app);
+// const db = getDatabase(app);
 
 function App() {
 
@@ -21,6 +22,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/sale' element={<Sale />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
       <Footer />
     </Router>
