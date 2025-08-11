@@ -12,6 +12,7 @@ const AdminPanel = () => {
     const [imageUrl, setImageUrl] = useState("")
     const [products, setProducts] = useState<any[]>([])
     const [showAddProduct, setShowAddProduct] = useState(false)
+    const [editingId, setEditingId] = useState<string | null>(null);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -45,7 +46,46 @@ const AdminPanel = () => {
                         <input onChange={e => setFinalPrice(e.target.value)} value={finalPrice} type="number" placeholder="Final Price" className="input" />
                         <input onChange={e => setAvailableStock(e.target.value)} value={availableStock} type="number" placeholder="Available Stock" className="input" />
                         <input onChange={e => setImageUrl(e.target.value)} value={imageUrl} type="text" placeholder="Image URL" className="input" />
-                        <button onClick={() => firebase.addProduct(title, description, price, finalPrice, availableStock, imageUrl)} type="button" className="btn btn-success text-white">Submit</button>
+                        <button
+                            type="button"
+                            className="btn btn-success text-white"
+                            onClick={() => {
+                                if (editingId) {
+                                    // Update product
+                                    firebase.updateProduct(editingId, {
+                                        title,
+                                        description,
+                                        price,
+                                        finalPrice,
+                                        availableStock,
+                                        imageUrl,
+                                    });
+                                    setEditingId(null); // Exit editing mode
+                                } else {
+                                    // Add product
+                                    firebase.addProduct(
+                                        title,
+                                        description,
+                                        price,
+                                        finalPrice,
+                                        availableStock,
+                                        imageUrl
+                                    );
+                                }
+
+                                // Clear form after submit
+                                setTitle("");
+                                setDescription("");
+                                setPrice("");
+                                setFinalPrice("");
+                                setAvailableStock("");
+                                setImageUrl("");
+                                setShowAddProduct(false);
+                            }}
+                        >
+                            {editingId ? "Update" : "Submit"}
+                        </button>
+
                     </form>}
             </div>
 
@@ -96,8 +136,17 @@ const AdminPanel = () => {
                                         {product.finalPrice}
                                     </td>
                                     <th>
-                                        <button className="btn btn-ghost btn-xs">Edit</button>
-                                        <button onClick={()=>firebase.deleteProduct(product.id)} className="btn btn-ghost btn-xs">Delete</button>
+                                        <button onClick={() => {
+                                            setTitle(product.title);
+                                            setDescription(product.description);
+                                            setPrice(product.price);
+                                            setFinalPrice(product.finalPrice);
+                                            setAvailableStock(product.availableStock);
+                                            setImageUrl(product.imageUrl);
+                                            setEditingId(product.id);
+                                            setShowAddProduct(true);
+                                        }} className="btn btn-ghost btn-xs">Edit</button>
+                                        <button onClick={() => firebase.deleteProduct(product.id)} className="btn btn-ghost btn-xs">Delete</button>
                                     </th>
                                 </tr>
                             )}

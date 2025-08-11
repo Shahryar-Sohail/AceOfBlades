@@ -3,7 +3,7 @@ import type { FirebaseApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFirestore, collection, addDoc, getDocs , deleteDoc , doc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs , deleteDoc , doc , updateDoc } from "firebase/firestore";
 
 export interface FirebaseContextType {
   app: FirebaseApp;
@@ -87,10 +87,19 @@ export const FirebaseProvider = (props: any) => {
     });
   }
 
+  const updateProduct = async (id: string, updatedData: any) => {
+  const db = getFirestore(app);
+  await updateDoc(doc(db, "products", id), updatedData).then(() => {
+    alert("Product Updated")
+    window.location.reload();
+  });
+
+};
+
 
 
   return (
-    <FirebaseContext.Provider value={{ app, handleLogin, addProduct, getAllProduct , deleteProduct }}>
+    <FirebaseContext.Provider value={{ app, handleLogin, addProduct, getAllProduct , deleteProduct , updateProduct }}>
       {props.children}
     </FirebaseContext.Provider>
 
