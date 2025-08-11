@@ -1,27 +1,14 @@
 import { useState } from "react"
-import {app} from "../firebase"
-import {getAuth,signInWithEmailAndPassword} from "firebase/auth"
+import { useFirebase } from "../firebase"
 
 const Login = () => {
 
+    const firebase = useFirebase();
     const [email , setEmail] = useState("")
     const [password , setPassword] = useState("")
+    
 
-    const handleLogin =(e)=>{
-        e.preventDefault();
-        const auth = getAuth(app);
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log("Login successful:", user);
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.error("Login failed:", errorCode, errorMessage);
-            });
-    }
+   
     return (
         <div>
             <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 p-10">
@@ -39,7 +26,7 @@ const Login = () => {
                             className="block w-full px-4 py-2 mt-2 text-gray-700 placeholder-gray-500 bg-white border rounded-lg dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" type="password" placeholder="Password" aria-label="Password" />
                         </div>
                         <div className="flex items-center justify-center mt-4">
-                            <button onClick={handleLogin} className="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+                            <button onClick={(e)=> firebase.handleLogin(e,email , password)} className="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
                                 Sign In
                             </button>
                         </div>

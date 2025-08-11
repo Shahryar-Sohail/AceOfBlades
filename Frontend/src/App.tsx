@@ -7,6 +7,7 @@ import './index.css'
 import Home from './pages/Home'
 import Sale from './pages/Sale'
 import Login from './pages/Login'
+import AdminPanel from './pages/AdminPanel'
 // import {app} from './firebase'
 // import { getDatabase } from 'firebase/database'
 
@@ -16,16 +17,17 @@ function App() {
 
 
   return (
-    <Router>
+    <>
       <Banner />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/sale' element={<Sale />} />
         <Route path='/login' element={<Login />} />
+        <Route path='/admin' element={<AdminPanel />} />
       </Routes>
       <Footer />
-    </Router>
+    </>
   )
 }
 
