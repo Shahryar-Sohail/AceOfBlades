@@ -76,7 +76,7 @@ const Navbar = () => {
                         </li>
                         <li><Link to="/sale">On Sale</Link></li>
                         <li><a>Articals</a></li>
-                        <li><a>Gallery</a></li>
+                        <li><Link to="/gallery">Gallery</Link></li>
                         <li><Link to="/cart">Cart</Link></li>
                         <li><Link to="/checkout">Checkout</Link></li>
                         <li><a>Contact US</a></li>
@@ -129,7 +129,7 @@ const Navbar = () => {
                         </li>
                         <li><Link to='/sale'>On Sale</Link></li>
                         <li><a>Articals</a></li>
-                        <li><a>Gallery</a></li>
+                        <li><Link to="/gallery">Gallery</Link></li>
                         <li><Link to="/cart">Cart</Link></li>
                         <li><Link to="/checkout">Checkout</Link></li>
                         <li><a>Contact US</a></li>

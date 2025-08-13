@@ -10,6 +10,7 @@ import Login from './pages/Login'
 import AdminPanel from './pages/AdminPanel'
 import Cart from './pages/Cart'
 import Checkout from './pages/Checkout'
+import Gallery from './pages/Gallery'
 // import {app} from './firebase'
 // import { getDatabase } from 'firebase/database'
 
@@ -29,6 +30,7 @@ function App() {
         <Route path='/admin' element={<AdminPanel />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/checkout' element={<Checkout />} />
+        <Route path='/gallery' element={<Gallery />} />
       </Routes>
       <Footer />
     </>

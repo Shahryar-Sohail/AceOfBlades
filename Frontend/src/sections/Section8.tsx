@@ -4,9 +4,24 @@ import Slider from "react-slick";
 import k1 from '../assets/k1.jpg';
 import k2 from '../assets/k2.jpg';
 import '../index.css'
+import { useFirebase } from "../firebase";
+import { useEffect, useState } from "react";
+
+
 
 
 const Section8 = () => {
+
+    const firebase = useFirebase();
+    const [products, setProducts] = useState<any[]>([])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const products = await firebase.getAllProduct();
+            setProducts(products);
+        };
+        fetchProducts();
+    }, [firebase]);
 
     const settings = {
         dots: true,
@@ -54,56 +69,60 @@ const Section8 = () => {
 
             <div className="slider-container">
                 <Slider {...settings} >
-                    <div>
-                        <img src={k1} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
+                    {products.map((product) => (
+                        <div key={product.id}>
+                            <img src={product.imageUrl} className="w-full md:w-3/4"></img>
+                            <h1 className="text-xl font-semibold">{product.title}</h1>
+                            <h1 className="font-semibold p-1">Rs {product.finalPrice}</h1>
+                            <div className="flex items-center justify-center m-2">
+                                <button onClick={() => firebase.addToCart(product)} className="btn btn-neutral btn-outline">Add To Cart</button>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <img src={k2} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={k1} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={k1} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={k2} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={k1} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
+                    ))}
 
-             
+
+                    {/* <div>
+                        <img src={k2} className="w-full md:w-3/4"></img>
+                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
+                        <h1 className="font-semibold p-1">Rs 980</h1>
+                        <div className="flex items-center justify-center m-2">
+                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
+                        </div>
+                    </div>
+                    <div>
+                        <img src={k1} className="w-full md:w-3/4"></img>
+                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
+                        <h1 className="font-semibold p-1">Rs 980</h1>
+                        <div className="flex items-center justify-center m-2">
+                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
+                        </div>
+                    </div>
+                    <div>
+                        <img src={k1} className="w-full md:w-3/4"></img>
+                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
+                        <h1 className="font-semibold p-1">Rs 980</h1>
+                        <div className="flex items-center justify-center m-2">
+                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
+                        </div>
+                    </div>
+                    <div>
+                        <img src={k2} className="w-full md:w-3/4"></img>
+                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
+                        <h1 className="font-semibold p-1">Rs 980</h1>
+                        <div className="flex items-center justify-center m-2">
+                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
+                        </div>
+                    </div>
+                    <div>
+                        <img src={k1} className="w-full md:w-3/4"></img>
+                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
+                        <h1 className="font-semibold p-1">Rs 980</h1>
+                        <div className="flex items-center justify-center m-2">
+                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
+                        </div>
+                    </div> */}
+
+
 
 
                 </Slider>
