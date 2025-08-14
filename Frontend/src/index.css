@@ -9,3 +9,13 @@
   color: black;
   font-size: 24px;
 }
+
+@keyframes cartPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.cart-added {
+  animation: cartPulse 0.6s ease;
+}

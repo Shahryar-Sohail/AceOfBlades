@@ -10,7 +10,6 @@ const Cart = () => {
     const [shippingCost, setShippingCost] = useState(0);
     const [checkoutDocId, setCheckoutDocId] = useState<string | null>(null);
 
-
     useEffect(() => {
         const fetchCartItems = async () => {
             const items = await firebase.getAllCartProduct();
@@ -57,6 +56,7 @@ const Cart = () => {
                 await updateDoc(docRef, {
                     totalPrice: total,
                     shippingCost: shippingCost,
+                    cartItems: cartItems,
                     updatedAt: new Date(),
                 });
             } else {
@@ -64,11 +64,11 @@ const Cart = () => {
                 const docRef = await addDoc(collection(db, "checkout"), {
                     totalPrice: total,
                     shippingCost: shippingCost,
+                    cartItems: cartItems,
                     createdAt: new Date(),
                 });
                 setCheckoutDocId(docRef.id);
             }
-            // alert("Checkout data saved!");
             navigate('/checkout');
         } catch (error) {
             console.error("Error saving checkout data:", error);
@@ -86,9 +86,9 @@ const Cart = () => {
                 <h1 className="text-3xl">Your Cart Items</h1>
                 <button className="btn btn-neutral"><Link to="/">Return To SHOP</Link></button>
             </div>
-
-            <div className="flex justify-around mx-5">
-                <div className="w-3/6 overflow-x-auto">
+            {/* cart items  */}
+            <div className="flex justify-around mx-5 ">
+                <div className="w-3/6 overflow-x-auto ">
                     <table className="table">
                         {/* head */}
                         <thead>
@@ -135,7 +135,7 @@ const Cart = () => {
                                             {product.totalPrice || product.finalPrice}
                                         </td>
                                         <th>
-                                            <button onClick={() => firebase.deleteCartItem(product.id)} className="btn btn-error btn-sm text-white">Delete</button>
+                                            <button onClick={() => firebase.deleteCartItem(product.id, fetchCartData)} className="btn btn-error btn-sm text-white">Delete</button>
                                         </th>
                                     </tr>
                                 )
@@ -158,7 +158,7 @@ const Cart = () => {
                     </table>
                 </div>
 
-                <div className="card bg-neutral text-white w-96 shadow-sm m-5">
+                <div className="card bg-neutral text-white w-96 shadow-sm m-5 h-96">
                     <div className="card-body p-5">
                         <h2 className="card-title text-4xl">Cart Total</h2>
                         <p className="text-xl py-5">Subtotal: {getTotalPrice()}</p>

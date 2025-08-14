@@ -15,23 +15,24 @@ const AdminPanel = () => {
     const [editingId, setEditingId] = useState<string | null>(null);
 
     // for checkout items 
-    const { getCheckoutDetails } = useFirebase();
+    const { getOrderDetails } = useFirebase();
     const [cartItems, setCartItems] = useState<any[]>([]);
+    const [customer, setCustomer] = useState<any>({});
     const [total, setTotal] = useState<number>(0);
     const [shippingCost, setShippingCost] = useState<number>(0);
 
     useEffect(() => {
-        const fetchCheckoutDetails = async () => {
-            const data = await getCheckoutDetails();
+        const fetchOrderDetails = async () => {
+            const data = await getOrderDetails();
             if (data) {
                 setCartItems(data.items || []);
                 setTotal(data.total || 0);
                 setShippingCost(data.shippingCost || 0);
+                setCustomer(data.customer || {});
             }
         };
-
-        fetchCheckoutDetails();
-    }, [getCheckoutDetails]);
+        fetchOrderDetails();
+    }, [getOrderDetails]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -108,7 +109,7 @@ const AdminPanel = () => {
                     </form>}
             </div>
 
-
+            {/* all products  */}
             <div className="w-5/6 mx-auto">
                 <div className="overflow-x-auto">
                     <table className="table">
@@ -187,9 +188,9 @@ const AdminPanel = () => {
                     </table>
                 </div>
             </div>
-
+            {/* check out by user  */}
             <div className="card border border-black w-5/6 mx-auto  my-10 rounded-none">
-            <div className="text-3xl text-center">Checkout Details For Admin</div>
+                <div className="text-3xl text-center">Checkout Details For Admin</div>
                 <div className="w-full overflow-x-auto">
                     <table className="table">
                         {/* head */}
@@ -236,12 +237,14 @@ const AdminPanel = () => {
                                             {product.finalPrice}
                                         </td>
                                         <td>
-                                            {product.totalPrice || product.finalPrice}
+                                            {product.quantity * product.finalPrice}
                                         </td>
 
                                     </tr>
                                 )
                             })}
+
+
                             <tr>
                                 <td className='font-bold text-xl'>SubTotal</td>
                                 <td></td>

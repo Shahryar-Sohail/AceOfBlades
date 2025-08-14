@@ -3,7 +3,7 @@ import type { FirebaseApp } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { createContext, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, limit } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, limit, getDoc } from "firebase/firestore";
 
 export interface FirebaseContextType {
   app: FirebaseApp;
@@ -26,6 +26,7 @@ export const app = initializeApp(firebaseConfig);
 
 export const FirebaseProvider = (props: any) => {
 
+  const db = getFirestore(app);
 
   const navigate = useNavigate();
   const handleLogin = (e: any, email: string, password: string) => {
@@ -57,6 +58,7 @@ export const FirebaseProvider = (props: any) => {
     })
       .then(() => {
         console.log("Product added successfully");
+
         alert("Product Added Successfully");
         window.location.reload();
       })
@@ -120,8 +122,9 @@ export const FirebaseProvider = (props: any) => {
         availableStock: product.availableStock,
         imageUrl: product.imageUrl
       });
+      // alert("Product added to cart successfully");
       console.log("Product added to cart successfully");
-      alert("Product Added to Cart Successfully");
+
     } catch (error) {
       console.error("Error adding to cart:", error);
     }
@@ -134,13 +137,23 @@ export const FirebaseProvider = (props: any) => {
     });
   };
 
-  const deleteCartItem = async (id: string) => {
+  const deleteCartItem = async (id: string, refreshCart: () => void) => {
     const db = getFirestore(app);
     await deleteDoc(doc(db, "cart", id)).then(() => {
       alert("Product Deleted Successfully from Cart");
-      window.location.reload();
+      refreshCart();
     });
-  }
+  };
+
+  const fetchProduct = async (id: string): Promise<any | null> => {
+    const docRef = doc(db, "products", id);
+    const docSnap = await getDoc(docRef);
+    if (docSnap.exists()) {
+      return docSnap.data(); // return the product
+    } else {
+      return null;
+    }
+  };
 
   const updateCartProduct = async (
     id: string,
@@ -173,20 +186,53 @@ export const FirebaseProvider = (props: any) => {
     const lastDoc = querySnapshot.docs[0];
     const data = lastDoc.data();
 
-    const cartItems = await getAllCartProduct();
+    // const cartItems = await getAllCartProduct();
 
     return {
-      items: cartItems,
+      items: data.cartItems || [],
       total: data.totalPrice,
       shippingCost: data.shippingCost,
     };
+  };
+  
+  const getOrderDetails = async () => {
+    const db = getFirestore(app);
+    const ordersRef = collection(db, "orders");
+
+    const q = query(ordersRef, orderBy("createdAt", "desc"), limit(1)); // latest doc
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) return null;
+
+    const lastDoc = querySnapshot.docs[0];
+    const data = lastDoc.data();
+
+    // const cartItems = await getAllCartProduct();
+
+    return {
+      items: data.cartItems || [],
+      total: data.total,
+      shippingCost: data.shipping.cost,
+      customer: data.customer || [],
+    };
+  };
+
+  const checkOutForm = async (formData: any) => {
+    try {
+      const docRef = await addDoc(collection(db, "orders"), formData);
+      console.log("Order submitted with ID: ", docRef.id);
+      alert("Order submitted successfully!");
+    } catch (error) {
+      console.error("Error adding document: ", error);
+      alert("Failed to submit order.");
+    }
   };
 
 
 
 
   return (
-    <FirebaseContext.Provider value={{ app, handleLogin, addProduct, getAllProduct, deleteProduct, updateProduct, getAllCartProduct, addToCart, listenCartCount, deleteCartItem, updateCartProduct, getCheckoutDetails }}>
+    <FirebaseContext.Provider value={{ app, handleLogin, addProduct, getAllProduct, deleteProduct, updateProduct, getAllCartProduct, addToCart, listenCartCount, deleteCartItem, updateCartProduct, getCheckoutDetails, fetchProduct , checkOutForm , getOrderDetails }}>
       {props.children}
     </FirebaseContext.Provider>
 

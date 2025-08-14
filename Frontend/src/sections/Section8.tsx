@@ -1,11 +1,10 @@
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import k1 from '../assets/k1.jpg';
-import k2 from '../assets/k2.jpg';
 import '../index.css'
 import { useFirebase } from "../firebase";
 import { useEffect, useState } from "react";
+import { motion } from "motion/react"
 
 
 
@@ -75,7 +74,14 @@ const Section8 = () => {
                             <h1 className="text-xl font-semibold">{product.title}</h1>
                             <h1 className="font-semibold p-1">Rs {product.finalPrice}</h1>
                             <div className="flex items-center justify-center m-2">
-                                <button onClick={() => firebase.addToCart(product)} className="btn btn-neutral btn-outline">Add To Cart</button>
+                                <motion.button
+                                    whileTap={{ scale: 0.9 }}
+                                    whileHover={{ scale: 1.05 }}
+                                    onClick={() => firebase.addToCart(product)}
+                                    className="btn btn-neutral text-white rounded-3xl"
+                                >
+                                    Add To Cart
+                                </motion.button>
                             </div>
                         </div>
                     ))}
