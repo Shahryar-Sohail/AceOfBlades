@@ -42,6 +42,7 @@ const Sale = ({ showHeader = true }: SaleProps) => {
                   src={product.imageUrl}
                   alt={product.title} className='w-80' />
               </figure>
+              <div className='border-2 border-black w-fit rounded-3xl p-2 absolute right-0 -top-2 hover:bg-black hover:text-white'>Sale</div>
             </Link>
 
             <div className="card-body">

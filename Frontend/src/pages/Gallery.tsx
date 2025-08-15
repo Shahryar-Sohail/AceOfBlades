@@ -18,7 +18,7 @@ const Gallery = () => {
             <h1 className="text-center">Photos All Over The World</h1>
             <div className="flex flex-col md:flex-row justify-center items-center flex-wrap gap-5 m-10 max-w-[1200px] mx-auto">
                 {images.map((img, idx) => (
-                    <div key={idx} className="card bg-base-100 w-full md:w-1/5 shadow-sm">
+                    <div key={idx} className="card bg-base-100 w-full md:w-1/5 shadow-sm p-10 md:p-0">
                         <figure>
                             <img className="w-full h-64 object-cover" src={img} alt={`Gallery image ${idx + 1}`} />
                         </figure>

@@ -78,18 +78,20 @@ const Cart = () => {
 
     return (
         <div>
-                <div style={{ background: `url(${image})`, height: '200px' }} className='bg-fixed flex justify-center items-center '>
-                    <h1 className='text-white text-4xl font-bold '>YOUR CART</h1>
-                </div>
+            <div style={{ background: `url(${image})`, height: '200px' }} className='bg-fixed flex justify-center items-center '>
+                <h1 className='text-white text-4xl font-bold '>YOUR CART</h1>
+            </div>
             <div className="max-w-[1200px] mx-auto">
 
                 <div className=" p-10">
                     <h1 className="text-3xl">Your Cart Items</h1>
                     <button className="btn btn-neutral"><Link to="/">Return To SHOP</Link></button>
                 </div>
-                {/* cart items  */}
-                <div className="flex justify-around  ">
-                    <div className="w-4/6 overflow-x-auto ">
+
+
+                <div className="block md:flex  md:justify-around  ">
+                    {/* cart items  */}
+                    <div className="w-full md:w-4/6 overflow-x-auto ">
                         <table className="table">
                             {/* head */}
                             <thead>
@@ -159,7 +161,8 @@ const Cart = () => {
                         </table>
                     </div>
 
-                    <div className="card bg-neutral text-white w-96 shadow-sm m-5 h-96">
+                    {/* bill details  */}
+                    <div className=" card bg-neutral text-white w-96 shadow-sm m-5 h-96">
                         <div className="card-body p-5">
                             <h2 className="card-title text-4xl">Cart Total</h2>
                             <p className="text-xl py-5">Subtotal: {getTotalPrice()}</p>
