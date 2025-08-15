@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useFirebase } from "../firebase";
+import img from "../assets/customer.png"; // Placeholder image
 
 const AdminPanel = () => {
 
@@ -190,18 +191,57 @@ const AdminPanel = () => {
                     </div>
                 </div>
 
+                {/* Customer Details */}
+                <div className="card w-5/6 mx-auto  my-10 rounded-none">
+                    <div className="text-3xl text-center">Customer Details</div>
+                    <div className="w-full overflow-x-auto">
+                        <table className="table">
+                            {/* head */}
+                            <thead>
+                                <tr>
+                                    <th>Image</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Company</th>
+                                    <th>Address</th>
+                                    <th>Phone</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
 
-                {/* customer details  */}
+                                        <tr>
+                                            <td>
+                                                <div className="flex items-center gap-3">
+                                                    <div className="avatar">
+                                                        <div className="mask mask-squircle h-12 w-12">
+                                                            <img src={img} />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div className="font-bold">{customer.firstName + " " + customer.lastName}</div>
+                                            </td>
+                                            <td>
+                                                {customer.email}
+                                            </td>
+                                            <td>
+                                                {customer.companyName}
+                                            </td>
+                                            <td>
+                                                {customer.houseNo + " " + customer.apartment + ", " + customer.townCity + ", " + customer.province + " " + customer.postalCode}
+                                            </td>
+                                            <td>
+                                                {customer.phone}
+                                            </td>
+                                        
 
-                <div className="flex w-5/6 mx-auto">
-                    <div className="card border border-black w-full mx-auto my-10 rounded-none">
-                        <div className="card-body ">
-                            <div className="card-title text-3xl font-normal flex justify-center ">Customer Details</div>
-                            <p><strong>Name:</strong> {customer.firstName + " " + customer.lastName}</p>
-                            <p><strong>Email:</strong> {customer.email}</p>
-                            <p><strong>Email:</strong> {customer.c}</p>
-                            <p><strong>Address:</strong> {customer.address}</p>
-                        </div>
+                                        </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

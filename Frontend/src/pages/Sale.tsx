@@ -34,13 +34,16 @@ const Sale = ({ showHeader = true }: SaleProps) => {
       {/* Cards Here below */}
       <div className='p-10 flex flex-wrap gap-4 justify-center '>
         {products.map((product) => (
-          <Link to={`/pages/${product.id}`}  key={product.id} className="card bg-base-100 w-80 shadow-sm">
-            
-            <figure>
-              <img
-                src={product.imageUrl}
-                alt={product.title} className='w-80' />
-            </figure>
+          <div>
+            <Link to={`/pages/${product.id}`} key={product.id} className="card bg-base-100 w-80 shadow-sm">
+
+              <figure>
+                <img
+                  src={product.imageUrl}
+                  alt={product.title} className='w-80' />
+              </figure>
+            </Link>
+
             <div className="card-body">
               <h2 className="card-title">{product.title}</h2>
               <p>{product.description}</p>
@@ -56,7 +59,7 @@ const Sale = ({ showHeader = true }: SaleProps) => {
                 </motion.button>
               </div>
             </div>
-          </Link>
+          </div>
         ))}
 
 
