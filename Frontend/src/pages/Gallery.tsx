@@ -16,7 +16,7 @@ const Gallery = () => {
         <>
             <h1 className="text-center text-3xl font-bold mt-5">Gallery</h1>
             <h1 className="text-center">Photos All Over The World</h1>
-            <div className="flex flex-col md:flex-row justify-center items-center flex-wrap gap-5 m-10 ">
+            <div className="flex flex-col md:flex-row justify-center items-center flex-wrap gap-5 m-10 max-w-[1200px] mx-auto">
                 {images.map((img, idx) => (
                     <div key={idx} className="card bg-base-100 w-full md:w-1/5 shadow-sm">
                         <figure>

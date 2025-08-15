@@ -63,7 +63,7 @@ const Section8 = () => {
 
     };
     return (
-        <div className=" m-10 w-5/6 mx-auto">
+        <div className=" m-10 w-5/6 mx-auto max-w-[1200px] ">
             <h1 className="text-4xl font-semibold text-left">RECENT PRODUCTS</h1>
 
             <div className="slider-container">

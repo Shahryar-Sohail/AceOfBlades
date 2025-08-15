@@ -1,11 +1,12 @@
 import '../index.css'
 const Banner = () => {
     return (
-        <div className="bg-black text-white text-sm sm:text-xl font-bold flex justify-end">
-            <div className="flex justify-end md:justify-between  items-center w-full px-10 md:w-4/6">
-
-                <p className='hidden md:block'>Free Delivery for Every Order above Rs-1000</p>
-                <nav className="grid grid-flow-col gap-4 md:place-self-center md:justify-self-end">
+        <div className="bg-black text-white text-sm sm:text-xl font-bold flex justify-end ">
+            {/* <div className="flex justify-end md:justify-between  items-center w-full px-10  "> */}
+            {/* <div className='max-w-[1200px] border-2 border-yellow-400 mx-auto flex'> */}
+                <div className='w-1/3'></div>
+                <div className='hidden md:block w-1/3 text-center'>Free Delivery for Every Order above Rs-1000</div>
+                <nav className="grid grid-flow-col gap-4 md:place-self-center md:justify-self-end w-1/3 justify-center">
                     <a>
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
@@ -46,7 +47,8 @@ const Banner = () => {
                         </svg>
                     </a>
                 </nav>
-            </div>
+            {/* </div> */}
+            {/* </div> */}
         </div>
     )
 }

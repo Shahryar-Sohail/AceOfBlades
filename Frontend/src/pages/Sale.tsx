@@ -32,7 +32,7 @@ const Sale = ({ showHeader = true }: SaleProps) => {
         </div>
       )}
       {/* Cards Here below */}
-      <div className='p-10 flex flex-wrap gap-4 border border-red-700 justify-center'>
+      <div className='p-10 flex flex-wrap gap-4 justify-center '>
         {products.map((product) => (
           <Link to={`/pages/${product.id}`}  key={product.id} className="card bg-base-100 w-80 shadow-sm">
             
