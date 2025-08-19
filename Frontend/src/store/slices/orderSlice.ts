@@ -67,7 +67,7 @@ export const fetchLatestOrder = createAsyncThunk("orders/fetchLatest", async () 
     customer: data.customer || {},
     cartItems: data.cartItems || [],
     total: data.total || 0,
-    shippingCost: data.shippingCost || 0
+    shippingCost: data.shipping.cost || 0
   };
 });
 

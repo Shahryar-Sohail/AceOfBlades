@@ -44,13 +44,14 @@ export const addToCart = createAsyncThunk(
 
         if (!querySnapshot.empty) {
             const docRef = querySnapshot.docs[0].ref;
+            const currentData = querySnapshot.docs[0].data() as CartItem;
 
-            // 👇 instead of always adding, directly overwrite with new quantity
-            await updateDoc(docRef, {
-                quantity: item.quantity,
-            });
+            // increment quantity based on DB value
+            const newQuantity = (currentData.quantity || 0) + 1;
 
-            return { ...item, docId: docRef.id };
+            await updateDoc(docRef, { quantity: newQuantity });
+
+            return { ...item, quantity: newQuantity, docId: docRef.id };
         } else {
             const docRef = await addDoc(collection(db, "cart"), {
                 ...item,
@@ -61,6 +62,17 @@ export const addToCart = createAsyncThunk(
     }
 );
 
+export const updateCartQuantity = createAsyncThunk(
+    "cart/updateCartQuantity",
+    async ({ docId, quantity }: { docId: string; quantity: number }) => {
+        const db = getFirestore(app);
+        const ref = doc(db, "cart", docId);
+
+        await updateDoc(ref, { quantity });
+
+        return { docId, quantity };
+    }
+);
 
 // 🔥 Remove from Cart (DB + Redux)
 export const removeFromCartDB = createAsyncThunk(
@@ -101,8 +113,10 @@ const cartSlice = createSlice({
             if (existing) {
                 existing.quantity = item.quantity;
                 existing.docId = item.docId; // sync docId
+                alert("✔ Product Updated Successfully" + ("Qty: " + existing.quantity));
             } else {
                 state.items.push(item);
+                alert("✔ Product Added Successfully")
             }
         });
 
@@ -112,6 +126,14 @@ const cartSlice = createSlice({
 
         builder.addCase(removeFromCartDB.fulfilled, (state, action) => {
             state.items = state.items.filter((i) => i.docId !== action.payload);
+        });
+        builder.addCase(updateCartQuantity.fulfilled, (state, action) => {
+            const { docId, quantity } = action.payload;
+            const existing = state.items.find((i) => i.docId === docId);
+
+            if (existing) {
+                existing.quantity = quantity;
+            }
         });
     },
 });

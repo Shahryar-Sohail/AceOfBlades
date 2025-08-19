@@ -2,7 +2,7 @@ import { Link, useNavigate } from "react-router-dom";
 import image from "../assets/hero-cart.jpg";
 import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { fetchCartFromDB, addToCart, removeFromCartDB } from "../store/slices/cartSlice";
+import { fetchCartFromDB, removeFromCartDB, updateCartQuantity } from "../store/slices/cartSlice";
 import { doc, updateDoc, getFirestore, addDoc, collection } from "firebase/firestore";
 import { app } from "../firebase";
 
@@ -21,20 +21,15 @@ const Cart = () => {
 
     const handleQuantityChange = (id: string, value: number) => {
         const product = cartItems.find((item) => item.id === id);
-        if (product) {
-            dispatch(
-                addToCart({
-                    ...product,
-                    quantity: value, // ✅ this will overwrite now
-                })
-            );
+        if (product && product.docId) {
+            dispatch(updateCartQuantity({ docId: product.docId, quantity: value }));
         }
     };
 
 
     const getTotalPrice = () => {
         const productsTotal = cartItems.reduce(
-            (total, product) => total + (product.price * product.quantity),
+            (total, product) => total + (product.finalPrice * product.quantity),
             0
         );
         return productsTotal + shippingCost;
@@ -125,8 +120,8 @@ const Cart = () => {
                                                 className="bg-black text-white input input-bordered w-16 text-center"
                                             />
                                         </td>
-                                        <td>{product.price}</td>
-                                        <td>{product.price * product.quantity}</td>
+                                        <td>{product.finalPrice}</td>
+                                        <td>{product.finalPrice * product.quantity}</td>
                                         <td>
                                             <button
                                                 onClick={() => dispatch(removeFromCartDB(product.docId!))}

@@ -140,7 +140,7 @@ const Checkout = () => {
                     </form>
 
                     {/* billing details  */}
-                    <div className="card border w-5/4 md:w-4/6 h-5/6 shadow-2xl m-5">
+                    <div className="card border w-5/4 md:w-full h-5/6 shadow-2xl m-5">
                         <div className="w-full overflow-x-auto">
                             <table className="table">
                                 {/* head */}
@@ -148,6 +148,7 @@ const Checkout = () => {
                                     <tr>
                                         <th>Product</th>
                                         <th></th>
+                                        <th>Quantity</th>
                                         <th></th>
                                         <th>Sub Total</th>
                                     </tr>
@@ -157,7 +158,7 @@ const Checkout = () => {
                                     {cartItems.map(product => {
                                         return (
                                             <tr key={product.id}>
-                                                <td>
+                                                <td className="items-center">
                                                     <div className="flex items-center gap-3">
                                                         <div className="avatar">
                                                             <div className="mask mask-squircle h-12 w-12">
@@ -168,14 +169,17 @@ const Checkout = () => {
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td className="text-center">
                                                     <div className="font-bold">{product.title}</div>
+                                                </td>
+                                                <td className="text-center">
+                                                    <div>{product.quantity}</div>
                                                 </td>
                                                 <td>
                                                     {product.description}
                                                 </td>
-                                                <td>
-                                                    {product.totalPrice || product.finalPrice}
+                                                <td className="text-center">
+                                                    {product.finalPrice * product.quantity}
                                                 </td>
 
                                             </tr>

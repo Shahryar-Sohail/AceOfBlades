@@ -1,35 +1,37 @@
 import { motion } from "motion/react"
-import { useFirebase } from "../firebase";
+// import { fetchProduct } from "../firebase";
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
+import { addToCart } from "../store/slices/cartSlice";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { fetchProductById } from "../store/slices/productSlice";
 
 
 const ProductDetail = () => {
-    const firebase = useFirebase();
+    // const firebase = useFirebase();
+    const dispatch = useAppDispatch();
     const { id } = useParams();
-    const [product, setProduct] = useState<{
-        title: string;
-        description: string;
-        price: number;
-        finalPrice: number;
-        availableStock: number;
-        imageUrl: string;
-    } | null>(null);
 
-    useEffect(() => {
-        if (id) {
-            firebase.fetchProduct(id).then((data: {
-                title: string;
-                description: string;
-                price: number;
-                finalPrice: number;
-                availableStock: number;
-                imageUrl: string;
-            }) => {
-                if (data) setProduct(data);
-            });
-        }
-    }, [id]);
+    const { selectedProduct: product, loading } = useAppSelector(
+        (state) => state.products
+    );
+
+      useEffect(() => {
+    if (id) dispatch(fetchProductById(id));
+  }, [id, dispatch]);
+
+  if (loading) {
+    return (
+      <div className="flex mx-auto my-20 w-3/6 flex-col gap-4">
+        <div className="skeleton h-32 w-full"></div>
+        <div className="skeleton h-4 w-28"></div>
+        <div className="skeleton h-4 w-full"></div>
+        <div className="skeleton h-4 w-full"></div>
+      </div>
+    );
+  }
+
+
 
 
     return (
@@ -58,7 +60,7 @@ const ProductDetail = () => {
                             <motion.button
                                 whileTap={{ scale: 0.1 }}
                                 whileHover={{ scale: 1.15 }}
-                                onClick={() => firebase.addToCart(product)}
+                                onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
                                 className="btn btn-neutral text-white rounded-3xl my-10"
                             >
                                 Add To Cart

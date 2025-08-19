@@ -1,5 +1,5 @@
 import image from '../assets/hero-bg.jpg'
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { motion } from "motion/react"
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
@@ -7,7 +7,7 @@ import { fetchProducts } from "../store/slices/productSlice";
 import { addToCart } from "../store/slices/cartSlice";
 
 interface SaleProps {
-  showHeader?: boolean; 
+  showHeader?: boolean;
 }
 
 const Sale = ({ showHeader = true }: SaleProps) => {
@@ -17,7 +17,18 @@ const Sale = ({ showHeader = true }: SaleProps) => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  if (loading) return <p className="text-center p-4">Loading...</p>;
+  if (loading) return <p className="text-center p-4">
+    <div className='grid grid-cols-3 gap-6 place-items-center '>
+      {Array.from({ length: 6 }).map((_, i) => (
+        <div key={i} className="flex w-52 flex-col gap-4">
+          <div className="skeleton h-32 w-full"></div>
+          <div className="skeleton h-4 w-28"></div>
+          <div className="skeleton h-4 w-full"></div>
+          <div className="skeleton h-4 w-full"></div>
+        </div>
+      ))}
+    </div>
+  </p>;
   return (
     <div>
       {showHeader && (

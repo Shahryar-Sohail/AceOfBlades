@@ -3,15 +3,13 @@ import type { FirebaseApp } from "firebase/app";
 // import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { createContext, useContext } from "react";
 // import { useNavigate } from "react-router-dom";
-import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc, onSnapshot, query, orderBy, limit, getDoc } from "firebase/firestore";
+import { getFirestore, collection, addDoc, getDocs, onSnapshot, query, orderBy, limit, doc, getDoc } from "firebase/firestore";
 
 export interface FirebaseContextType {
   app: FirebaseApp;
 }
 const FirebaseContext = createContext<FirebaseContextType | any>(null);
 export const useFirebase = () => useContext(FirebaseContext);
-
-
 
 const firebaseConfig = {
   apiKey: "AIzaSyDJmBXN06mGvMz6Mu_1OCtw3rqa7NhG5GE",
@@ -37,8 +35,6 @@ export const getCheckoutDetails = async () => {
 
   const lastDoc = querySnapshot.docs[0];
   const data = lastDoc.data();
-
-  // const cartItems = await getAllCartProduct();
 
   return {
     items: data.cartItems || [],
@@ -82,6 +78,16 @@ export const addProduct = (title: string, description: string, price: number, fi
       console.error("Error adding product:", error);
     });
 }
+
+export const fetchProduct = async (id: string): Promise<any | null> => {
+  const docRef = doc(db, "products", id);
+  const docSnap = await getDoc(docRef);
+  if (docSnap.exists()) {
+    return docSnap.data(); // return the product
+  } else {
+    return null;
+  }
+};
 
 // export const FirebaseProvider = (props: any) => {
 
@@ -176,15 +182,7 @@ export const addProduct = (title: string, description: string, price: number, fi
 //     });
 //   };
 
-//   const fetchProduct = async (id: string): Promise<any | null> => {
-//     const docRef = doc(db, "products", id);
-//     const docSnap = await getDoc(docRef);
-//     if (docSnap.exists()) {
-//       return docSnap.data(); // return the product
-//     } else {
-//       return null;
-//     }
-//   };
+
 
 //   const updateCartProduct = async (
 //     id: string,
