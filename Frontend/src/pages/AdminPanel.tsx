@@ -1,49 +1,59 @@
 import { useEffect, useState } from "react";
-import { useFirebase } from "../firebase";
-import img from "../assets/customer.png"; // Placeholder image
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProducts, addProduct, updateProduct, deleteProduct } from "../store/slices/productSlice";
+import { fetchLatestOrder } from "../store/slices/orderSlice";
+import type { RootState, AppDispatch } from "../store/store";
+import img from "../assets/customer.png"; 
 
 const AdminPanel = () => {
 
-    const firebase = useFirebase();
+    const dispatch = useDispatch<AppDispatch>();
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
     const [price, setPrice] = useState("")
     const [finalPrice, setFinalPrice] = useState("")
     const [availableStock, setAvailableStock] = useState("")
     const [imageUrl, setImageUrl] = useState("")
-    const [products, setProducts] = useState<any[]>([])
     const [showAddProduct, setShowAddProduct] = useState(false)
     const [editingId, setEditingId] = useState<string | null>(null);
 
-    // for checkout items 
-    const { getOrderDetails } = useFirebase();
-    const [cartItems, setCartItems] = useState<any[]>([]);
-    const [customer, setCustomer] = useState<any>({});
-    const [total, setTotal] = useState<number>(0);
-    const [shippingCost, setShippingCost] = useState<number>(0);
+
+
+    const { items: products = [] } = useSelector(
+        (state: RootState) => state.products
+    );
+
+    const { customer, cartItems, total, shippingCost } = useSelector(
+        (state: RootState) => state.orders
+    ) || {};
+
 
     useEffect(() => {
-        const fetchOrderDetails = async () => {
-            const data = await getOrderDetails();
-            if (data) {
-                setCartItems(data.items || []);
-                setTotal(data.total || 0);
-                setShippingCost(data.shippingCost || 0);
-                setCustomer(data.customer || {});
-            }
-        };
-        fetchOrderDetails();
-    }, [getOrderDetails]);
+        dispatch(fetchProducts());
+        dispatch(fetchLatestOrder());
+    }, [dispatch]);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            const allProducts = await firebase.getAllProduct();
-            setProducts(allProducts);
-            console.log(allProducts);
-
+    const handleSubmit = () => {
+        const productData = {
+            title,
+            description,
+            price: Number(price),
+            finalPrice: Number(finalPrice),
+            availableStock: Number(availableStock),
+            imageUrl
         };
-        fetchData();
-    }, []);
+
+        if (editingId) {
+            dispatch(updateProduct({ id: editingId, updatedData: productData }));
+            setEditingId(null);
+        } else {
+            dispatch(addProduct(productData));
+        }
+
+        // Clear form
+        setTitle(""); setDescription(""); setPrice(""); setFinalPrice("");
+        setAvailableStock(""); setImageUrl(""); setShowAddProduct(false);
+    };
 
     return (
         <div>
@@ -58,6 +68,7 @@ const AdminPanel = () => {
                         {showAddProduct ? "Close Form" : "Add Product"}
                     </button>
                 </div>
+                {/* Add New Product  */}
                 <div className="flex flex-col justify-center items-center px-8">
                     {/* <h1 className="text-center text-3xl underline ">Add New Product</h1> */}
                     {showAddProduct &&
@@ -71,39 +82,7 @@ const AdminPanel = () => {
                             <button
                                 type="button"
                                 className="btn btn-success text-white"
-                                onClick={() => {
-                                    if (editingId) {
-                                        // Update product
-                                        firebase.updateProduct(editingId, {
-                                            title,
-                                            description,
-                                            price,
-                                            finalPrice,
-                                            availableStock,
-                                            imageUrl,
-                                        });
-                                        setEditingId(null); // Exit editing mode
-                                    } else {
-                                        // Add product
-                                        firebase.addProduct(
-                                            title,
-                                            description,
-                                            price,
-                                            finalPrice,
-                                            availableStock,
-                                            imageUrl
-                                        );
-                                    }
-
-                                    // Clear form after submit
-                                    setTitle("");
-                                    setDescription("");
-                                    setPrice("");
-                                    setFinalPrice("");
-                                    setAvailableStock("");
-                                    setImageUrl("");
-                                    setShowAddProduct(false);
-                                }}
+                                onClick={() => handleSubmit()}
                             >
                                 {editingId ? "Update" : "Submit"}
                             </button>
@@ -168,7 +147,7 @@ const AdminPanel = () => {
                                                 setEditingId(product.id);
                                                 setShowAddProduct(true);
                                             }} className="btn btn-ghost btn-xs">Edit</button>
-                                            <button onClick={() => firebase.deleteProduct(product.id)} className="btn btn-ghost btn-xs">Delete</button>
+                                            <button onClick={() => dispatch(deleteProduct(product.id))} className="btn btn-ghost btn-xs">Delete</button>
                                         </th>
                                     </tr>
                                 )}
@@ -208,38 +187,38 @@ const AdminPanel = () => {
                                 </tr>
                             </thead>
                             <tbody>
-                                
 
-                                        <tr>
-                                            <td>
-                                                <div className="flex items-center gap-3">
-                                                    <div className="avatar">
-                                                        <div className="mask mask-squircle h-12 w-12">
-                                                            <img src={img} />
-                                                        </div>
-                                                    </div>
-                                                    <div>
-                                                    </div>
+
+                                <tr>
+                                    <td>
+                                        <div className="flex items-center gap-3">
+                                            <div className="avatar">
+                                                <div className="mask mask-squircle h-12 w-12">
+                                                    <img src={img} />
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <div className="font-bold">{customer.firstName + " " + customer.lastName}</div>
-                                            </td>
-                                            <td>
-                                                {customer.email}
-                                            </td>
-                                            <td>
-                                                {customer.companyName}
-                                            </td>
-                                            <td>
-                                                {customer.houseNo + " " + customer.apartment + ", " + customer.townCity + ", " + customer.province + " " + customer.postalCode}
-                                            </td>
-                                            <td>
-                                                {customer.phone}
-                                            </td>
-                                        
+                                            </div>
+                                            <div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div className="font-bold">{customer?.firstName + " " + customer?.lastName}</div>
+                                    </td>
+                                    <td>
+                                        {customer?.email}
+                                    </td>
+                                    <td>
+                                        {customer?.companyName}
+                                    </td>
+                                    <td>
+                                        {customer?.houseNo + " " + customer?.apartment + ", " + customer?.townCity + ", " + customer?.province + " " + customer?.postalCode}
+                                    </td>
+                                    <td>
+                                        {customer?.phone}
+                                    </td>
 
-                                        </tr>
+
+                                </tr>
                             </tbody>
                         </table>
                     </div>
@@ -257,6 +236,7 @@ const AdminPanel = () => {
                                     <th>Title</th>
                                     <th>Description</th>
                                     <th>Stock</th>
+                                    <th>Quantity</th>
                                     <th>Price</th>
                                     <th>Final Price</th>
                                     <th>Sub Total</th>
@@ -266,7 +246,7 @@ const AdminPanel = () => {
                                 {/* row 1 */}
                                 {cartItems.map(product => {
                                     return (
-                                        <tr key={product.id}>
+                                        <tr key={product.id} className="text-center">
                                             <td>
                                                 <div className="flex items-center gap-3">
                                                     <div className="avatar">
@@ -288,6 +268,9 @@ const AdminPanel = () => {
                                                 {product.availableStock}
                                             </td>
                                             <td>
+                                                {product.quantity}
+                                            </td>
+                                            <td>
                                                 {product.price}
                                             </td>
                                             <td>
@@ -302,14 +285,14 @@ const AdminPanel = () => {
                                 })}
 
 
-                                <tr>
+                                <tr >
                                     <td className='font-bold text-xl'>SubTotal</td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>{total - shippingCost}</td>
+                                    <td className="text-center" >{total - shippingCost}</td>
                                 </tr>
                                 <tr>
                                     <td className='font-bold text-xl'>
@@ -321,7 +304,7 @@ const AdminPanel = () => {
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td>{shippingCost}</td>
+                                    <td className="text-center">{shippingCost}</td>
                                 </tr>
                                 <tr>
                                     <td className='font-bold text-3xl'>Total </td>
@@ -330,14 +313,14 @@ const AdminPanel = () => {
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td className=" text-2xl">{total}</td>
+                                    <td className=" text-2xl text-center">{total}</td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

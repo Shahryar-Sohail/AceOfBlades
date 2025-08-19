@@ -9,11 +9,10 @@ import li6 from '../assets/knifecare.png'
 import li7 from '../assets/razor.jpg'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { useFirebase } from "../firebase";
+import { listenCartCount } from "../firebase";
 
 const Navbar = () => {
     const [cartCount, setCartCount] = useState(0);
-    const { listenCartCount } = useFirebase();
 
     useEffect(() => {
         const unsubscribe = listenCartCount((count: number) => {

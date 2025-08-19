@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import image from "../assets/hero-cart.jpg"
-import { useFirebase } from "../firebase"
+import type { RootState, AppDispatch } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchCheckout, submitCheckout } from "../store/slices/checkoutSlice";
 
 const Checkout = () => {
-    const { getCheckoutDetails, checkOutForm } = useFirebase();
-    const [cartItems, setCartItems] = useState<any[]>([]);
-    const [total, setTotal] = useState<number>(0);
-    const [shippingCost, setShippingCost] = useState<number>(0);
+
 
     const [email, setEmail] = useState<string>("");
     const [firstName, setFirstName] = useState<string>("");
@@ -20,18 +19,28 @@ const Checkout = () => {
     const [phone, setPhone] = useState<string>("");
     const [terms, setTerms] = useState<boolean>(false);
 
-    useEffect(() => {
-        const fetchCheckoutDetails = async () => {
-            const data = await getCheckoutDetails();
-            if (data) {
-                setCartItems(data.items || []);
-                setTotal(data.total || 0);
-                setShippingCost(data.shippingCost || 0);
-            }
-        };
+    const dispatch = useDispatch<AppDispatch>();
+    const { cartItems, total, shippingCost } = useSelector(
+        (state: RootState) => state.checkout
+    );
 
-        fetchCheckoutDetails();
-    }, [getCheckoutDetails]);
+    useEffect(() => {
+        dispatch(fetchCheckout());
+    }, [dispatch]);
+
+
+    // useEffect(() => {
+    //     const fetchCheckoutDetails = async () => {
+    //         const data = await getCheckoutDetails();
+    //         if (data) {
+    //             setCartItems(data.items || []);
+    //             setTotal(data.total || 0);
+    //             setShippingCost(data.shippingCost || 0);
+    //         }
+    //     };
+
+    //     fetchCheckoutDetails();
+    // }, [getCheckoutDetails]);
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -41,7 +50,6 @@ const Checkout = () => {
             return;
         }
 
-        // Prepare the order data
         const formData = {
             customer: {
                 email,
@@ -74,7 +82,7 @@ const Checkout = () => {
             createdAt: new Date(),
         };
 
-        checkOutForm(formData);
+        dispatch(submitCheckout(formData));
     };
 
     return (
@@ -83,8 +91,8 @@ const Checkout = () => {
                 <h1 className='text-white text-4xl font-bold '>Checkout</h1>
             </div>
 
-                <div className="max-w-[1200px] mx-auto">
-            <div className="flex flex-col md:flex-row justify-between">
+            <div className="max-w-[1200px] mx-auto">
+                <div className="flex flex-col md:flex-row justify-between">
                     {/* customer form  */}
                     <form className="m-10">
                         <div>

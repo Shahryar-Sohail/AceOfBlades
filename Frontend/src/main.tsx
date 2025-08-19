@@ -5,15 +5,16 @@ import { BrowserRouter } from 'react-router-dom'
 import './index.css'
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { FirebaseProvider } from './firebase'
+import { Provider } from "react-redux";
+import { store } from "./store/store";
 import App from './App'
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
-      <FirebaseProvider>
+      <Provider store={store}>
         <App />
-      </FirebaseProvider>
+      </Provider>
     </BrowserRouter>
   </StrictMode>,
 )

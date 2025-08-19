@@ -2,25 +2,23 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import '../index.css'
-import { useFirebase } from "../firebase";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { motion } from "motion/react"
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { fetchProducts } from "../store/slices/productSlice";
+import { addToCart } from "../store/slices/cartSlice";
 
 
 
 
 const Section8 = () => {
 
-    const firebase = useFirebase();
-    const [products, setProducts] = useState<any[]>([])
-
-    useEffect(() => {
-        const fetchProducts = async () => {
-            const products = await firebase.getAllProduct();
-            setProducts(products);
-        };
-        fetchProducts();
-    }, [firebase]);
+      const dispatch = useAppDispatch();
+      const { items: products } = useAppSelector((state) => state.products);
+    
+      useEffect(() => {
+        dispatch(fetchProducts());
+      }, [dispatch]);
 
     const settings = {
         dots: true,
@@ -77,7 +75,7 @@ const Section8 = () => {
                                 <motion.button
                                     whileTap={{ scale: 0.9 }}
                                     whileHover={{ scale: 1.05 }}
-                                    onClick={() => firebase.addToCart(product)}
+                                    onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
                                     className="btn btn-neutral text-white rounded-3xl"
                                 >
                                     Add To Cart

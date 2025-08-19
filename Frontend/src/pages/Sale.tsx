@@ -1,26 +1,23 @@
 import image from '../assets/hero-bg.jpg'
-import { useFirebase } from "../firebase";
-import { useEffect, useState } from "react";
+import { useEffect} from "react";
 import { motion } from "motion/react"
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { fetchProducts } from "../store/slices/productSlice";
+import { addToCart } from "../store/slices/cartSlice";
 
 interface SaleProps {
-  showHeader?: boolean; // default false if not passed
+  showHeader?: boolean; 
 }
 
-
 const Sale = ({ showHeader = true }: SaleProps) => {
-  const firebase = useFirebase();
-  const [products, setProducts] = useState<any[]>([])
+  const dispatch = useAppDispatch();
+  const { items: products, loading } = useAppSelector((state) => state.products);
 
   useEffect(() => {
-    const fetchProducts = async () => {
-      const products = await firebase.getAllProduct();
-      setProducts(products);
-    };
-    fetchProducts();
-  }, [firebase]);
-
+    dispatch(fetchProducts());
+  }, [dispatch]);
+  if (loading) return <p className="text-center p-4">Loading...</p>;
   return (
     <div>
       {showHeader && (
@@ -34,8 +31,8 @@ const Sale = ({ showHeader = true }: SaleProps) => {
       {/* Cards Here below */}
       <div className='p-10 flex flex-wrap gap-4 justify-center '>
         {products.map((product) => (
-          <div>
-            <Link to={`/pages/${product.id}`} key={product.id} className="card bg-base-100 w-80 shadow-sm">
+          <div key={product.id} >
+            <Link to={`/pages/${product.id}`} className="card bg-base-100 w-80 shadow-sm">
 
               <figure>
                 <img
@@ -53,7 +50,7 @@ const Sale = ({ showHeader = true }: SaleProps) => {
                 <motion.button
                   whileTap={{ scale: 0.1 }}
                   whileHover={{ scale: 1.15 }}
-                  onClick={() => firebase.addToCart(product)}
+                  onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
                   className="btn btn-neutral text-white rounded-3xl"
                 >
                   Add To Cart
