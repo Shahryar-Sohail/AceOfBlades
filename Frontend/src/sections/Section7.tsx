@@ -3,11 +3,12 @@ import lock from '../assets/lock.png';
 import bus from '../assets/bus.png';
 const Section7 = () => {
     return (
-        <div className="bg-black text-white p-0 md:p-10">
+        <div className="bg-black text-white p-4 md:p-10">
             <h1 className="text-center text-4xl font-semibold">HOW DOES IT WORKS?</h1>
             <p className="text-center">o u r &nbsp;o n l i n e &nbsp;e x p e r i e n c e &nbsp;m a d e &nbsp;e a s y</p>
+
             <div className='grid md:flex content-center justify-center items-center'>
-                <div className="card bg-transparent w-96 shadow-sm mr-10 ">
+                <div className="card bg-transparent w-5/6 mx-auto sm:w-96 shadow-sm mr-10">
                     <figure className="px-10 pt-10">
                         <img
                             src={star}
@@ -23,7 +24,7 @@ const Section7 = () => {
                 </div>
                 <div className='bg-red-500 border-r-2 h-0 md:h-96 '></div>
 
-                <div className="card bg-transparent w-96 shadow-sm mr-10">
+                <div className="card bg-transparent  w-5/6 mx-auto sm:w-96 shadow-sm mr-10">
                     <figure className="px-10 pt-10">
                         <img
                             src={lock}
@@ -39,7 +40,7 @@ const Section7 = () => {
                 </div>
 
                 <div className='bg-red-500 border-r-2 h-0 md:h-96 '></div>
-                <div className="card bg-transparent w-96 shadow-sm mr-10">
+                <div className="card bg-transparent  w-5/6 mx-auto sm:w-96 shadow-sm mr-10">
                     <figure className="px-10 pt-10">
                         <img
                             src={bus}

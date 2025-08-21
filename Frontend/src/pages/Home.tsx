@@ -33,7 +33,7 @@ const Home = () => {
 
                         <p className="text-white text-md mt-2 pr-1">- THE ACE OF BLADES</p>
 
-                        <div className="flex justify-end gap-4 mt-4 pr-1">
+                        <div className="flex justify-end gap-4 mt-4 -mr-6 pr-1">
                             <button className="btn btn-soft bg-white hover:bg-gray-800 hover:text-white hover:border-none rounded-none w-40">
                                 SHOP NOW
                             </button>

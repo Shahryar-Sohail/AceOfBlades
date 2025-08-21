@@ -5,8 +5,9 @@ import hands from '../assets/hands.png'
 
 const Section3 = () => {
     return (
-        <div className="grid lg:flex  justify-between items-center p-10 md:p-40 overflow-hidden ">
-            <div className='flex max-w-[1200px] mx-auto'>
+        <div className="p-4 md:p-40 overflow-hidden ">
+            <div className='grid lg:flex  justify-between items-center max-w-[1200px] mx-auto'>
+
                 <div className="w-1/2 lg:w-2/4">
                     <h1 className="text-3xl font-semibold  md:text-5xl">WHO ARE WE</h1>
                     <p className="text-lg font-semibold">HOMEMADE & HANDCRAFTED</p>
@@ -51,6 +52,7 @@ const Section3 = () => {
                         </div>
                     </div>
                 </div>
+
                 <div className='flex justify-center items-center lg:w-full w-1/2 overflow-hidden'>
                     <img src={image} alt="Section 3" className="w-5/6 lg:w-4/6 h-auto shadow-lg" />
                 </div>
