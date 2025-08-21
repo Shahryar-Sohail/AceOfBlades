@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../index.css'
 
 const Banner = () => {
@@ -18,6 +19,7 @@ const Banner = () => {
                                 c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
                         </svg>
                     </a>
+
                     <a>
                         <svg xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" className="fill-current">
@@ -34,6 +36,7 @@ const Banner = () => {
                                 2.457-2.549z"></path>
                         </svg>
                     </a>
+
                     <a>
                         <svg xmlns="http://www.w3.org/2000/svg"
                             width="24" height="24" viewBox="0 0 24 24" className="fill-current">
@@ -46,7 +49,8 @@ const Banner = () => {
                                 12.816v-8l8 3.993-8 4.007z"></path>
                         </svg>
                     </a>
-                    <a className='block md:hidden'>
+
+                    <Link to='/login'  className='block md:hidden'>
                         <svg xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 24 24" fill="yellow" className="size-6">
                             <path fillRule="evenodd" d="M7.5 6a4.5 4.5 0 1 1
@@ -57,7 +61,7 @@ const Banner = () => {
                                 0-5.433-.608-7.812-1.7a.75.75
                                 0 0 1-.437-.695Z" clipRule="evenodd" />
                         </svg>
-                    </a>
+                    </Link>
                 </nav>
             </div>
         </div>
