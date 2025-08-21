@@ -22,6 +22,7 @@ const Section7 = () => {
                     </div>
                 </div>
                 <div className='bg-red-500 border-r-2 h-0 md:h-96 '></div>
+
                 <div className="card bg-transparent w-96 shadow-sm mr-10">
                     <figure className="px-10 pt-10">
                         <img
@@ -36,7 +37,8 @@ const Section7 = () => {
 
                     </div>
                 </div>
-                <div className='bg-red-500 border-2 h-0 md:h-96'></div>
+
+                <div className='bg-red-500 border-r-2 h-0 md:h-96 '></div>
                 <div className="card bg-transparent w-96 shadow-sm mr-10">
                     <figure className="px-10 pt-10">
                         <img

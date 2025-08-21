@@ -24,7 +24,8 @@ const Navbar = () => {
 
 
     return (
-        <div className='w-full sticky top-7 z-50 bg-white'>
+        <div className='w-[98%] sticky top-6 z-50 bg-white'>
+            {/* mobile navbar  */}
             <div className="navbar shadow-sm py-6  bg-white max-w-[1200px] mx-auto">
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -85,7 +86,7 @@ const Navbar = () => {
                     <a className="btn btn-ghost w-32"><img src={logo} /></a>
                 </div>
 
-                <div className=' w-full flex sm:hidden justify-end -mr-28'>
+                <div className=' w-full flex sm:hidden justify-end -mr-24'>
                     <Link to='/cart' className='md:block border border-black p-2 relative'>
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-6">
                             <path d="M2.25 2.25a.75.75 0 0 0 0 1.5h1.386c.17 0 .318.114.362.278l2.558 9.592a3.752 3.752 0 0 0-2.806 3.63c0 .414.336.75.75.75h15.75a.75.75 0 0 0 0-1.5H5.378A2.25 2.25 0 0 1 7.5 15h11.218a.75.75 0 0 0 .674-.421 60.358 60.358 0 0 0 2.96-7.228.75.75 0 0 0-.525-.965A60.864 60.864 0 0 0 5.68 4.509l-.232-.867A1.875 1.875 0 0 0 3.636 2.25H2.25ZM3.75 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0ZM16.5 20.25a1.5 1.5 0 1 1 3 0 1.5 1.5 0 0 1-3 0Z" />

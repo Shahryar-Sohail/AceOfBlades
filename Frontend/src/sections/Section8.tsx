@@ -22,7 +22,7 @@ const Section8 = () => {
 
     const settings = {
         dots: true,
-        infinite: false,
+        infinite: true,
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -67,7 +67,7 @@ const Section8 = () => {
             <div className="slider-container">
                 <Slider {...settings} >
                     {products.map((product) => (
-                        <div key={product.id}>
+                        <div key={product.id} >
                             <img src={product.imageUrl} className="w-full md:w-3/4"></img>
                             <h1 className="text-xl font-semibold">{product.title}</h1>
                             <h1 className="font-semibold p-1">Rs {product.finalPrice}</h1>
@@ -83,52 +83,6 @@ const Section8 = () => {
                             </div>
                         </div>
                     ))}
-
-
-                    {/* <div>
-                        <img src={k2} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={k1} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={k1} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={k2} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div>
-                    <div>
-                        <img src={k1} className="w-full md:w-3/4"></img>
-                        <h1 className="text-xl font-semibold">AOB-2452 Handmade <br /> Damascus Chef's Knife</h1>
-                        <h1 className="font-semibold p-1">Rs 980</h1>
-                        <div className="flex items-center justify-center m-2">
-                            <button className="btn btn-neutral btn-outline">Add To Cart</button>
-                        </div>
-                    </div> */}
-
-
-
-
                 </Slider>
             </div>
 

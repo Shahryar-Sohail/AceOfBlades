@@ -137,7 +137,7 @@ const Cart = () => {
                     </div>
 
                     {/* bill details */}
-                    <div className="card bg-neutral text-white w-96 shadow-sm m-5 h-96">
+                    <div className="card bg-neutral text-white md:w-96 w-5/6 shadow-sm m-5 h-96">
                         <div className="card-body p-5">
                             <h2 className="card-title text-4xl">Cart Total</h2>
                             <p className="text-xl py-5">Subtotal: {getTotalPrice()}</p>
