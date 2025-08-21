@@ -1,4 +1,4 @@
-import image from '../assets/knifeinbag.jpg'
+import image from '../assets/knifeBag.jpg'
 
 
 const Section5 = () => {
