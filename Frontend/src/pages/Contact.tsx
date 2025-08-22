@@ -1,76 +1,8 @@
-import { useEffect, useState } from "react";
 import image from "../assets/hero-cart.jpg"
-import type { RootState, AppDispatch } from "../store/store";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCheckout, submitCheckout } from "../store/slices/checkoutSlice";
 
 const Contact = () => {
 
 
-    const [email, setEmail] = useState<string>("");
-    const [firstName, setFirstName] = useState<string>("");
-    const [lastName, setLastName] = useState<string>("");
-    const [companyName, setCompanyName] = useState<string>("");
-    const [houseNo, setHouseNo] = useState<string>("");
-    const [apartment, setApartment] = useState<string>("");
-    const [townCity, setTownCity] = useState<string>("");
-    const [province, setProvince] = useState<string>("");
-    const [postalCode, setPostalCode] = useState<string>("");
-    const [phone, setPhone] = useState<string>("");
-    const [terms, setTerms] = useState<boolean>(false);
-
-    const dispatch = useDispatch<AppDispatch>();
-    const { cartItems, total, shippingCost } = useSelector(
-        (state: RootState) => state.checkout
-    );
-
-    useEffect(() => {
-        dispatch(fetchCheckout());
-    }, [dispatch]);
-
-
-    const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
-
-        if (!terms) {
-            alert("Please agree to the terms and conditions.");
-            return;
-        }
-
-        const formData = {
-            customer: {
-                email,
-                firstName,
-                lastName,
-                companyName,
-                houseNo,
-                apartment,
-                townCity,
-                province,
-                postalCode,
-                phone,
-            },
-            shipping: {
-                type: shippingCost === 0 ? "Free Shipping" : "Express Shipping",
-                cost: shippingCost
-            },
-            termsAccepted: terms,
-            cartItems: cartItems.map(item => ({
-                id: item.id,
-                title: item.title,
-                description: item.description,
-                imageUrl: item.imageUrl,
-                quantity: item.quantity || 1,
-                price: item.price,
-                finalPrice: item.finalPrice,
-                availableStock: item.availableStock,
-            })),
-            total,
-            createdAt: new Date(),
-        };
-
-        dispatch(submitCheckout(formData));
-    };
 
     return (
         <div>
@@ -122,16 +54,16 @@ const Contact = () => {
                     <form className="m-10 w-full">
                         <div>
                             <h2 className='text-2xl font-bold'>Full Name</h2>
-                            <input id="email" onChange={(e) => setEmail(e.target.value)} className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Name here*" />
+                            <input id="email"  className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Name here*" />
                         </div>
                         <div>
                             <h2 className='text-2xl font-bold'>Email Address</h2>
-                            <input id="email" onChange={(e) => setEmail(e.target.value)} className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Email here*" />
+                            <input id="email" className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Email here*" />
                         </div>
 
                         <div>
                             <h2 className='text-2xl font-bold'>Phone Number</h2>
-                            <input id="phone" onChange={(e) => setPhone(e.target.value)} className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Phone*" />
+                            <input id="phone"  className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Phone*" />
 
                             <div className="flex flex-col md:flex-row  gap-5">
                                 <div className="border-2 border-black w-5/6 md:w-1/2">

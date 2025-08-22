@@ -25,8 +25,8 @@ const Navbar = () => {
 
     return (
         <div className='w-[98%] sticky top-6 z-50 bg-white'>
-            {/* mobile navbar  */}
             <div className="navbar shadow-sm py-6  bg-white max-w-[1200px] mx-auto">
+                {/* mobile navbar  */}
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -38,7 +38,7 @@ const Navbar = () => {
                             <li><Link to="/">Home</Link></li>
                             <li>
                                 <details>
-                                    <summary>AOB Collection</summary>
+                                    <summary><Link to="/shop">AOB Collection</Link></summary>
                                     <ul className="p-2 text-red-700 text-sm">
                                         <li className='flex flex-row items-center'>
                                             <img src={logoSmall} className='w-16' />
@@ -102,7 +102,7 @@ const Navbar = () => {
                         <li><Link to="/">Home</Link></li>
                         <li>
                             <details>
-                                <summary>AOB Collection</summary>
+                                <summary><Link to="/shop">AOB Collection</Link></summary>
                                 <ul className="p-2 w-96 text-red-700 text-sm">
                                     <li className='flex flex-row items-center'>
                                         <img src={logoSmall} className='w-24' />

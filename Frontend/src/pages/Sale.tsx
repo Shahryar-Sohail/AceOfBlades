@@ -17,7 +17,7 @@ const Sale = ({ showHeader = true }: SaleProps) => {
   useEffect(() => {
     dispatch(fetchProducts());
   }, [dispatch]);
-  if (loading) return <p className="text-center p-4">
+  if (loading) return <div className="text-center p-4">
     <div className='grid grid-cols-3 gap-6 place-items-center '>
       {Array.from({ length: 6 }).map((_, i) => (
         <div key={i} className="flex w-52 flex-col gap-4">
@@ -28,7 +28,7 @@ const Sale = ({ showHeader = true }: SaleProps) => {
         </div>
       ))}
     </div>
-  </p>;
+  </div>;
   return (
     <div>
       {showHeader && (

@@ -13,6 +13,7 @@ import Checkout from './pages/Checkout'
 import Gallery from './pages/Gallery'
 import ProductDetail from './pages/ProductDetail'
 import Contact from './pages/Contact'
+import Shop from './pages/Shop'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path='/gallery' element={<Gallery />} />
           <Route path='/pages/:id' element={<ProductDetail />} />
           <Route path='/contact' element={<Contact />} />
+          <Route path='/shop' element={<Shop />} />
         </Routes>
       </div>
       <Footer />
