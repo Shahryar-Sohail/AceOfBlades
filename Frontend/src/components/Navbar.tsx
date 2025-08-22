@@ -80,7 +80,7 @@ const Navbar = () => {
                             <li><Link to="/gallery">Gallery</Link></li>
                             <li><Link to="/cart">Cart</Link></li>
                             <li><Link to="/checkout">Checkout</Link></li>
-                            <li><a>Contact US</a></li>
+                            <li><Link to="/contact">Contact US</Link></li>
                         </ul>
                     </div>
                     <a className="btn btn-ghost w-32"><img src={logo} /></a>
@@ -144,7 +144,7 @@ const Navbar = () => {
                         <li><Link to="/gallery">Gallery</Link></li>
                         <li><Link to="/cart">Cart</Link></li>
                         <li><Link to="/checkout">Checkout</Link></li>
-                        <li><a>Contact US</a></li>
+                        <li><Link to="/contact">Contact US</Link></li>
                     </ul>
                 </div>
                 <div className="navbar-end justify-center p-2">

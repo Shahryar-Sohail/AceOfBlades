@@ -29,18 +29,7 @@ const Checkout = () => {
     }, [dispatch]);
 
 
-    // useEffect(() => {
-    //     const fetchCheckoutDetails = async () => {
-    //         const data = await getCheckoutDetails();
-    //         if (data) {
-    //             setCartItems(data.items || []);
-    //             setTotal(data.total || 0);
-    //             setShippingCost(data.shippingCost || 0);
-    //         }
-    //     };
-
-    //     fetchCheckoutDetails();
-    // }, [getCheckoutDetails]);
+    
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
