@@ -31,7 +31,6 @@ export const addProduct = createAsyncThunk(
   }
 );
 
-
 export const updateProduct = createAsyncThunk(
   "products/update",
   async ({ id, updatedData }: { id: string; updatedData: any }) => {
@@ -40,7 +39,6 @@ export const updateProduct = createAsyncThunk(
     return { id, ...updatedData };
   }
 );
-
 
 export const deleteProduct = createAsyncThunk(
   "products/delete",
@@ -51,11 +49,18 @@ export const deleteProduct = createAsyncThunk(
   }
 );
 
+export const countProducts = createAsyncThunk("products/count", async () => {
+  const db = getFirestore(app);
+  const snapshot = await getDocs(collection(db, "products"));
+  return snapshot.size;
+});
+
 interface ProductState {
   items: any[];
   selectedProduct: any | null;
   loading: boolean;
   error: string | null;
+  productCount: number;
 }
 
 const initialState: ProductState = {
@@ -63,6 +68,7 @@ const initialState: ProductState = {
   selectedProduct: null,
   loading: false,
   error: null,
+  productCount: 0,
 };
 
 const productSlice = createSlice({
@@ -106,6 +112,8 @@ const productSlice = createSlice({
       .addCase(fetchProductById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.error.message || "Failed to load product";
+      }).addCase(countProducts.fulfilled, (state, action) => {
+        state.productCount = action.payload;
       });
   },
 });

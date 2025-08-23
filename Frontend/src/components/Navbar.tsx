@@ -19,7 +19,7 @@ const Navbar = () => {
             setCartCount(count);
         });
 
-        return () => unsubscribe(); // stop listening on unmount
+        return () => unsubscribe(); 
     }, []);
 
 

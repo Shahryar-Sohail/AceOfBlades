@@ -1,6 +1,26 @@
 import image from '../assets/hero-bg.jpg'
+import image1 from '../assets/logo.jpg'
+import image2 from '../assets/g1.jpg'
+import image3 from '../assets/g2.jpg'
+import image4 from '../assets/g3.jpg'
+import image5 from '../assets/knifecare.png'
+import image6 from '../assets/li4.jpg'
+import image7 from '../assets/knifeBag.jpg'
+
+import { countProducts } from '../store/slices/productSlice'
+import { useEffect } from 'react'
+import { useAppDispatch, useAppSelector } from '../store/hooks'
+import { Link } from 'react-router-dom'
+
 
 const Shop = () => {
+    const dispatch = useAppDispatch();
+    const productCount = useAppSelector((state) => state.products.productCount);
+    useEffect(() => {
+        dispatch(countProducts());
+    }, [dispatch]);
+
+
     return (
         <div>
             <div
@@ -10,26 +30,115 @@ const Shop = () => {
                 <h1 className='text-white text-4xl font-bold'>SHOP</h1>
                 <h1 className='text-white text-1xl font-bold'>HOME <span>&gt;&gt;</span> Shop</h1>
             </div>
-            <h1 className="text-center text-3xl font-bold mt-5">Gallery</h1>
-            <h1 className="text-center">Photos All Over The World</h1>
+
             <div className="flex flex-col md:flex-row justify-center items-center flex-wrap gap-5 m-10 max-w-[1200px] mx-auto">
-                
-                <div className="card bg-base-100 image-full w-96 shadow-sm">
-                    <figure>
-                        <img
-                            src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                            alt="Shoes" />
-                    </figure>
-                    <div className="card-body">
-                        <h2 className="card-title">Card Title</h2>
-                        <p>A card component has a figure, a body part, and inside body there are title and actions parts</p>
-                        <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Buy Now</button>
+
+                <Link to={`/category/Uncategorized`}> <div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div
+                        style={{ background: `url(${image1})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+                        className=' flex flex-col h-72 '
+                    >
+                        <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
+                            <h2 className="font-bold" id='category'>Uncategorized</h2>
+                            <p className=''>Products: {productCount}</p>
                         </div>
                     </div>
                 </div>
+                </Link>
+
+                <Link to={`/category/Collectors`}><div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div
+                        style={{ background: `url(${image2})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+                        className=' flex flex-col h-72 '
+                    >
+                        <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
+                            <h2 className="font-bold">Collectors and limited-edition knives</h2>
+                            <p className=''>Products: </p>
+                        </div>
+                    </div>
+                </div>
+                </Link>
+
+                <Link to={`/category/Fixed Blades`}><div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div
+                        style={{ background: `url(${image3})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+                        className=' flex flex-col h-72 '
+                    >
+                        <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
+                            <h2 className="font-bold">Fixed Blade Knives</h2>
+                            <p className=''>Products: </p>
+                        </div>
+                    </div>
+                </div>
+                </Link>
+
+                <Link to={`/category/Folding Knives`}><div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div
+                        style={{ background: `url(${image4})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+                        className=' flex flex-col h-72 '
+                    >
+                        <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
+                            <h2 className="font-bold">Folding Knives</h2>
+                            <p className=''>Products: </p>
+                        </div>
+                    </div>
+                </div>
+                </Link>
+                {/* second row  */}
+                <Link to={`/category/Key Rings`}><div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div
+                        style={{ background: `url(${image5})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+                        className=' flex flex-col h-72 '
+                    >
+                        <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
+                            <h2 className="font-bold">Key Ring</h2>
+                            <p className=''>Products: </p>
+                        </div>
+                    </div>
+                </div>
+                </Link>
+
+                <Link to={`/category/Kitchen and Chef Knives`}><div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div
+                        style={{ background: `url(${image6})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+                        className=' flex flex-col h-72 '
+                    >
+                        <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
+                            <h2 className="font-bold">Kitchen and Chef Knives</h2>
+                            <p className=''>Products: </p>
+                        </div>
+                    </div>
+                </div>
+                </Link>
+
+                <Link to={`/category/Knife Care`}><div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div
+                        style={{ background: `url(${image3})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+                        className=' flex flex-col h-72 '
+                    >
+                        <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
+                            <h2 className="font-bold">Knife Care</h2>
+                            <p className=''>Products: </p>
+                        </div>
+                    </div>
+                </div>
+                </Link>
+
+                <Link to={`/category/Straight Razors`}><div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
+                    <div
+                        style={{ background: `url(${image7})`, backgroundSize: 'cover', backgroundRepeat: 'no-repeat' }}
+                        className=' flex flex-col h-72 '
+                    >
+                        <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
+                            <h2 className="font-bold">Straight Razors</h2>
+                            <p className=''>Products: </p>
+                        </div>
+                    </div>
+                </div>
+                </Link>
+
             </div>
-        </div>
+        </div >
     )
 }
 
