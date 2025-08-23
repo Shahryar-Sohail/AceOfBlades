@@ -61,6 +61,7 @@ interface ProductState {
   loading: boolean;
   error: string | null;
   productCount: number;
+  categoryCounts: Record<string, number>;
 }
 
 const initialState: ProductState = {
@@ -69,6 +70,7 @@ const initialState: ProductState = {
   loading: false,
   error: null,
   productCount: 0,
+  categoryCounts: {},
 };
 
 const productSlice = createSlice({
@@ -83,6 +85,14 @@ const productSlice = createSlice({
       .addCase(fetchProducts.fulfilled, (state, action) => {
         state.loading = false;
         state.items = action.payload;
+
+        state.productCount = action.payload.length;
+
+        const counts: Record<string, number> = {};
+        action.payload.forEach((p: any) => {
+          counts[p.category] = (counts[p.category] || 0) + 1;
+        });
+        state.categoryCounts = counts;
       })
       .addCase(fetchProducts.rejected, (state, action) => {
         state.loading = false;

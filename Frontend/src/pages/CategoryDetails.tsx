@@ -1,7 +1,7 @@
 import { Link, useParams } from "react-router-dom";
 import image from '../assets/hero-bg.jpg';
 import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { fetchProducts } from "../store/slices/productSlice";
 import { motion } from "motion/react"
 import { addToCart } from "../store/slices/cartSlice";
@@ -10,11 +10,19 @@ const CategoryDetails = () => {
     const { categoryName } = useParams();
     const dispatch = useAppDispatch();
     const { items: products, loading } = useAppSelector((state) => state.products);
+    const [filteredProducts, setFilteredProducts] = useState<typeof products>([]);
 
     useEffect(() => {
         dispatch(fetchProducts());
     }, [dispatch]);
-    
+
+    useEffect(() => {
+        if (categoryName) {
+            const filtered = products.filter(product => product.category === categoryName);
+            setFilteredProducts(filtered);
+        }
+    }, [categoryName, products]);
+
     if (loading) return <div className="text-center p-4">
         <div className='grid grid-cols-3 gap-6 place-items-center '>
             {Array.from({ length: 6 }).map((_, i) => (
@@ -39,7 +47,7 @@ const CategoryDetails = () => {
 
             {/* Cards Here below */}
             <div className='p-10 flex flex-wrap gap-4 justify-center '>
-                {products.map((product) => (
+                {filteredProducts.map((product) => (
                     <div key={product.id} >
                         <Link to={`/pages/${product.id}`} className="card bg-base-100 w-80 shadow-sm">
 

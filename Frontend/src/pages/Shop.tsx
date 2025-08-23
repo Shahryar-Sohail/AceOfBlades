@@ -7,7 +7,7 @@ import image5 from '../assets/knifecare.png'
 import image6 from '../assets/li4.jpg'
 import image7 from '../assets/knifeBag.jpg'
 
-import { countProducts } from '../store/slices/productSlice'
+import { fetchProducts } from '../store/slices/productSlice'
 import { useEffect } from 'react'
 import { useAppDispatch, useAppSelector } from '../store/hooks'
 import { Link } from 'react-router-dom'
@@ -15,9 +15,9 @@ import { Link } from 'react-router-dom'
 
 const Shop = () => {
     const dispatch = useAppDispatch();
-    const productCount = useAppSelector((state) => state.products.productCount);
+    const { categoryCounts } = useAppSelector((state) => state.products);
     useEffect(() => {
-        dispatch(countProducts());
+        dispatch(fetchProducts());
     }, [dispatch]);
 
 
@@ -40,7 +40,7 @@ const Shop = () => {
                     >
                         <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
                             <h2 className="font-bold" id='category'>Uncategorized</h2>
-                            <p className=''>Products: {productCount}</p>
+                            <p className=''>Products: {categoryCounts["Uncategorized"] || 0}</p>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@ const Shop = () => {
                     >
                         <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
                             <h2 className="font-bold">Collectors and limited-edition knives</h2>
-                            <p className=''>Products: </p>
+                            <p className=''>Products: {categoryCounts["Collectors"] || 0}</p>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ const Shop = () => {
                     >
                         <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
                             <h2 className="font-bold">Fixed Blade Knives</h2>
-                            <p className=''>Products: </p>
+                            <p className=''>Products: {categoryCounts["Fixed Blades"] || 0}</p>
                         </div>
                     </div>
                 </div>
@@ -79,7 +79,7 @@ const Shop = () => {
                     >
                         <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
                             <h2 className="font-bold">Folding Knives</h2>
-                            <p className=''>Products: </p>
+                            <p className=''>Products: {categoryCounts["Folding Knives"] || 0}</p>
                         </div>
                     </div>
                 </div>
@@ -92,7 +92,7 @@ const Shop = () => {
                     >
                         <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
                             <h2 className="font-bold">Key Ring</h2>
-                            <p className=''>Products: </p>
+                            <p className=''>Products: {categoryCounts["Key Rings"] || 0}</p>
                         </div>
                     </div>
                 </div>
@@ -105,7 +105,7 @@ const Shop = () => {
                     >
                         <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
                             <h2 className="font-bold">Kitchen and Chef Knives</h2>
-                            <p className=''>Products: </p>
+                            <p className=''>Products: {categoryCounts["Kitchen and Chef Knives"] || 0}</p>
                         </div>
                     </div>
                 </div>
@@ -118,7 +118,7 @@ const Shop = () => {
                     >
                         <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
                             <h2 className="font-bold">Knife Care</h2>
-                            <p className=''>Products: </p>
+                            <p className=''>Products: {categoryCounts["Knife Care"] || 0}</p>
                         </div>
                     </div>
                 </div>
@@ -131,7 +131,7 @@ const Shop = () => {
                     >
                         <div className="bg-white/90 relative top-40 flex flex-col justify-center items-center p-3">
                             <h2 className="font-bold">Straight Razors</h2>
-                            <p className=''>Products: </p>
+                            <p className=''>Products: {categoryCounts["Straight Razors"] || 0}</p>
                         </div>
                     </div>
                 </div>
