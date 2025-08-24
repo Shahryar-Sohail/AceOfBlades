@@ -23,6 +23,16 @@ const CategoryDetails = () => {
         }
     }, [categoryName, products]);
 
+    const lowToHigh = () => {
+        const sorted = [...filteredProducts].sort((a, b) => a.finalPrice - b.finalPrice);
+        setFilteredProducts(sorted);
+    };
+
+    const highToLow = () => {
+        const sorted = [...filteredProducts].sort((a, b) => b.finalPrice - a.finalPrice);
+        setFilteredProducts(sorted);
+    };
+
     if (loading) return <div className="text-center p-4">
         <div className='grid grid-cols-3 gap-6 place-items-center '>
             {Array.from({ length: 6 }).map((_, i) => (
@@ -43,6 +53,16 @@ const CategoryDetails = () => {
                 className='bg-fixed flex justify-center items-center '
             >
                 <h2 className="text-white font-semibold text-xl">Home&gt;&gt;Shop&gt;&gt;{categoryName}</h2>
+            </div>
+
+            <div className="flex justify-end p-8 w-5/6 mx-auto">
+                <div className="dropdown">
+                    <div tabIndex={0} role="button" className="btn m-1">Default Sorting \/</div>
+                    <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+                        <li><button onClick={lowToHigh}>Sort By Price: Low to High</button></li>
+                        <li><button onClick={highToLow}>Sort By Price: High to Low</button></li>
+                    </ul>
+                </div>
             </div>
 
             {/* Cards Here below */}
