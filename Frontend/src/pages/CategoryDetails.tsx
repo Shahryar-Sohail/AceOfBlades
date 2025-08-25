@@ -84,14 +84,20 @@ const CategoryDetails = () => {
                             <p>{product.description}</p>
                             <p className='text-sm font-semibold'>RS {product.finalPrice} <span className='line-through'>RS {product.price}</span></p>
                             <div className="card-actions justify-center">
-                                <motion.button
-                                    whileTap={{ scale: 0.1 }}
-                                    whileHover={{ scale: 1.15 }}
-                                    onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
-                                    className="btn btn-neutral text-white rounded-3xl"
-                                >
-                                    Add To Cart
-                                </motion.button>
+                               <motion.button
+                                whileTap={{ scale: 0.1 }}
+                                whileHover={{ scale: 1.15 }}
+                                onClick={(e) => {
+                                    const btn = e.currentTarget;
+                                    btn.innerHTML = "✔ Added!";
+                                    setTimeout(() => (btn.innerHTML = "Add To Cart"), 1500);
+                                    dispatch(addToCart({ ...product, quantity: 1 }))
+                                }
+                                }
+                                className="btn btn-neutral text-white rounded-3xl my-10"
+                            >
+                                Add To Cart
+                            </motion.button>
                             </div>
                         </div>
                     </div>

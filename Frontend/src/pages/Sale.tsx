@@ -61,7 +61,12 @@ const Sale = ({ showHeader = true }: SaleProps) => {
                 <motion.button
                   whileTap={{ scale: 0.1 }}
                   whileHover={{ scale: 1.15 }}
-                  onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
+                  onClick={(e) => {
+                    const btn = e.currentTarget;
+                    btn.innerHTML = "✔ Added!";
+                    setTimeout(() => (btn.innerHTML = "Add To Cart"), 1500);
+                    dispatch(addToCart({ ...product, quantity: 1 }))
+                  }}
                   className="btn btn-neutral text-white rounded-3xl"
                 >
                   Add To Cart

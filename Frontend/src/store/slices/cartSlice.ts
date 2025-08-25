@@ -15,7 +15,7 @@ import {
 import { app } from "../../firebase";
 
 interface CartItem {
-    id: string; // product id
+    id: string; 
     title: string;
     price: number;
     quantity: number;
@@ -53,7 +53,6 @@ export const addToCart = createAsyncThunk(
             const docRef = querySnapshot.docs[0].ref;
             const currentData = querySnapshot.docs[0].data() as CartItem;
 
-            // increment quantity based on DB value
             const newQuantity = (currentData.quantity || 0) + 1;
 
             await updateDoc(docRef, { quantity: newQuantity });
@@ -118,10 +117,10 @@ const cartSlice = createSlice({
             if (existing) {
                 existing.quantity = item.quantity;
                 existing.docId = item.docId; // sync docId
-                alert("✔ Product Updated Successfully" + ("Qty: " + existing.quantity));
+                // alert("✔ Product Updated Successfully" + ("Qty: " + existing.quantity));
             } else {
                 state.items.push(item);
-                alert("✔ Product Added Successfully")
+                // alert("✔ Product Added Successfully")
             }
         });
 

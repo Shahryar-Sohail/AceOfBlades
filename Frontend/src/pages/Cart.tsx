@@ -5,6 +5,7 @@ import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchCartFromDB, removeFromCartDB, updateCartQuantity } from "../store/slices/cartSlice";
 import { doc, updateDoc, getFirestore, addDoc, collection } from "firebase/firestore";
 import { app } from "../firebase";
+import { motion } from "motion/react"
 
 const Cart = () => {
     const dispatch = useAppDispatch();
@@ -25,7 +26,6 @@ const Cart = () => {
             dispatch(updateCartQuantity({ docId: product.docId, quantity: value }));
         }
     };
-
 
     const getTotalPrice = () => {
         const productsTotal = cartItems.reduce(
@@ -123,12 +123,20 @@ const Cart = () => {
                                         <td>{product.finalPrice}</td>
                                         <td>{product.finalPrice * product.quantity}</td>
                                         <td>
-                                            <button
-                                                onClick={() => dispatch(removeFromCartDB(product.docId!))}
-                                                className="btn btn-error btn-sm text-white"
+                                            <motion.button
+                                                whileTap={{ scale: 0.1 }}
+                                                whileHover={{ scale: 1.15 }}
+                                                onClick={(e) => {
+                                                    const btn = e.currentTarget;
+                                                    btn.innerHTML = "❌Removed";
+                                                    setTimeout(() => (btn.innerHTML = "Delete"), 1500);
+                                                    dispatch(removeFromCartDB(product.docId!))
+                                                }
+                                                }
+                                                className="btn btn-error btn-sm text-white w-20"
                                             >
                                                 Delete
-                                            </button>
+                                            </motion.button>
                                         </td>
                                     </tr>
                                 ))}

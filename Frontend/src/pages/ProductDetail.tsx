@@ -1,7 +1,7 @@
 import { motion } from "motion/react"
 // import { fetchProduct } from "../firebase";
 import { useParams } from "react-router-dom";
-import { useEffect} from "react";
+import { useEffect } from "react";
 import { addToCart } from "../store/slices/cartSlice";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { fetchProductById } from "../store/slices/productSlice";
@@ -16,20 +16,20 @@ const ProductDetail = () => {
         (state) => state.products
     );
 
-      useEffect(() => {
-    if (id) dispatch(fetchProductById(id));
-  }, [id, dispatch]);
+    useEffect(() => {
+        if (id) dispatch(fetchProductById(id));
+    }, [id, dispatch]);
 
-  if (loading) {
-    return (
-      <div className="flex mx-auto my-20 w-3/6 flex-col gap-4">
-        <div className="skeleton h-32 w-full"></div>
-        <div className="skeleton h-4 w-28"></div>
-        <div className="skeleton h-4 w-full"></div>
-        <div className="skeleton h-4 w-full"></div>
-      </div>
-    );
-  }
+    if (loading) {
+        return (
+            <div className="flex mx-auto my-20 w-3/6 flex-col gap-4">
+                <div className="skeleton h-32 w-full"></div>
+                <div className="skeleton h-4 w-28"></div>
+                <div className="skeleton h-4 w-full"></div>
+                <div className="skeleton h-4 w-full"></div>
+            </div>
+        );
+    }
 
 
 
@@ -60,7 +60,13 @@ const ProductDetail = () => {
                             <motion.button
                                 whileTap={{ scale: 0.1 }}
                                 whileHover={{ scale: 1.15 }}
-                                onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
+                                onClick={(e) => {
+                                    const btn = e.currentTarget;
+                                    btn.innerHTML = "✔ Added!";
+                                    setTimeout(() => (btn.innerHTML = "Add To Cart"), 1500);
+                                    dispatch(addToCart({ ...product, quantity: 1 }))
+                                }
+                                }
                                 className="btn btn-neutral text-white rounded-3xl my-10"
                             >
                                 Add To Cart

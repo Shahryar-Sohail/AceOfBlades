@@ -3,6 +3,7 @@ import image from "../assets/hero-cart.jpg"
 import type { RootState, AppDispatch } from "../store/store";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCheckout, submitCheckout } from "../store/slices/checkoutSlice";
+import { motion } from "motion/react"
 
 const Checkout = () => {
 
@@ -29,7 +30,7 @@ const Checkout = () => {
     }, [dispatch]);
 
 
-    
+
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -122,9 +123,19 @@ const Checkout = () => {
                                 <input id="terms" onChange={(e) => setTerms(e.target.checked)} type="checkbox" className="mr-1 w-4 h-4" />
                                 <p className="font-bold ">I have read and agree to the website terms and conditions</p>
                             </div>
-                            <button onClick={handleSubmit} type="button" className="btn btn-neutral hover:bg-success hover:border-none w-5/6 mt-5">
+                            <motion.button
+                                whileTap={{ scale: 0.1 }}
+                                whileHover={{ scale: 1.15 }}
+                                onClick={
+                                    (e) => {
+                                        const btn = e.currentTarget;
+                                        btn.innerHTML = "✔ Order Placed";
+                                        setTimeout(() => (btn.innerHTML = "Place Order"), 1500);
+                                        handleSubmit(e)
+                                    }
+                                } type="button" className="btn btn-neutral hover:bg-success hover:border-none w-5/6 mt-5">
                                 Place Order <span className="font-bold"> RS {total} </span>
-                            </button>
+                            </motion.button>
                         </div>
                     </form>
 
@@ -200,8 +211,8 @@ const Checkout = () => {
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

@@ -3,6 +3,7 @@ import image from "../assets/hero-cart.jpg"
 import { submitContact } from "../store/slices/contactSlice";
 import type { AppDispatch } from "../store/store";
 import { useDispatch } from "react-redux";
+import { motion } from "motion/react"
 
 const Contact = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -24,7 +25,7 @@ const Contact = () => {
             message
         };
         await dispatch(submitContact(contactData));
-        alert("Contact submitted successfully!");
+        // alert("Contact submitted successfully!");
 
     }
 
@@ -120,15 +121,25 @@ const Contact = () => {
                             </div>
                             <textarea rows={6} onChange={(e) => setMessage(e.target.value)} placeholder="Your Message*" className="border p-2 text-xl w-5/6 my-5" />
 
-                            <button onClick={handleSubmit} type="button" className="btn btn-neutral hover:bg-success hover:border-none w-5/6 mt-5">
+                            <motion.button
+                                whileTap={{ scale: 0.1 }}
+                                whileHover={{ scale: 1.15 }}
+                                onClick={
+                                    (e) => {
+                                        const btn = e.currentTarget;
+                                        btn.innerHTML = "✔ Form Submitted!";
+                                        setTimeout(() => (btn.innerHTML = "Submit"), 1500);
+                                        handleSubmit()
+                                    }
+                                } type="button" className="btn btn-neutral hover:bg-success hover:border-none w-5/6 mt-5">
                                 Submit
-                            </button>
+                            </motion.button>
                         </div>
                     </form>
 
                 </div>
-            </div>
-        </div>
+            </div >
+        </div >
     )
 }
 

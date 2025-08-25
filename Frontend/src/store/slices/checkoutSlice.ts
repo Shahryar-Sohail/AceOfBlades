@@ -56,7 +56,7 @@ export const submitCheckout = createAsyncThunk(
           try {
             const docRef = await addDoc(collection(db, "orders"), formData);
             console.log("Order submitted with ID: ", docRef.id);
-            alert("Order submitted successfully!");
+            // alert("Order submitted successfully!");
           } catch (error) {
             console.error("Error adding document: ", error);
             alert("Failed to submit order.");
