@@ -9,7 +9,8 @@ import {
     query,
     where,
     deleteDoc,
-    doc
+    doc,
+    onSnapshot
 } from "firebase/firestore";
 import { app } from "../../firebase";
 
@@ -33,7 +34,13 @@ const initialState: CartState = {
     items: [],
 };
 
-// 🔥 Add/Update Cart
+export const listenCartCount = (callback: (count: number) => void) => {
+  const db = getFirestore(app);
+  return onSnapshot(collection(db, "cart"), (snapshot) => {
+    callback(snapshot.size);
+  });
+};
+
 export const addToCart = createAsyncThunk(
     "cart/addToCartDB",
     async (item: CartItem) => {
@@ -74,7 +81,6 @@ export const updateCartQuantity = createAsyncThunk(
     }
 );
 
-// 🔥 Remove from Cart (DB + Redux)
 export const removeFromCartDB = createAsyncThunk(
     "cart/removeFromCartDB",
     async (docId: string) => {
@@ -84,7 +90,6 @@ export const removeFromCartDB = createAsyncThunk(
     }
 );
 
-// 🔥 Fetch Cart
 export const fetchCartFromDB = createAsyncThunk(
     "cart/fetchCartFromDB",
     async () => {

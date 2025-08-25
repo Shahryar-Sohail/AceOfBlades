@@ -1,5 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { getCheckoutDetails, checkOutForm } from "../../firebase"; 
+import { db } from "../../firebase"; 
+import { collection, query, orderBy, limit, getDocs, addDoc } from "firebase/firestore";
 
 interface CartItem {
     id: string;
@@ -27,19 +28,39 @@ const initialState: CheckoutState = {
     status: "idle",
 };
 
+
+
 export const fetchCheckout = createAsyncThunk(
-    "checkout/fetchCheckout",
-    async () => {
-        const data = await getCheckoutDetails();
-        return data;
-    }
+  "checkout/fetchCheckout",
+  async () => {
+    const checkoutRef = collection(db, "checkout");
+    const q = query(checkoutRef, orderBy("createdAt", "desc"), limit(1));
+    const querySnapshot = await getDocs(q);
+
+    if (querySnapshot.empty) return null;
+
+    const lastDoc = querySnapshot.docs[0];
+    const data = lastDoc.data();
+
+    return {
+      items: data.cartItems || [],
+      total: data.totalPrice,
+      shippingCost: data.shippingCost,
+    };
+  }
 );
 
 export const submitCheckout = createAsyncThunk(
     "checkout/submitCheckout",
     async (formData: any) => {
-        await checkOutForm(formData);
-        return formData;
+          try {
+            const docRef = await addDoc(collection(db, "orders"), formData);
+            console.log("Order submitted with ID: ", docRef.id);
+            alert("Order submitted successfully!");
+          } catch (error) {
+            console.error("Error adding document: ", error);
+            alert("Failed to submit order.");
+          }
     }
 );
 

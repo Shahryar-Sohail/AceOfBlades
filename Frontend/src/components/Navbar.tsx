@@ -9,7 +9,7 @@ import li6 from '../assets/knifecare.png'
 import li7 from '../assets/razor.jpg'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
-import { listenCartCount } from "../firebase";
+import { listenCartCount } from "../store/slices/cartSlice";
 
 const Navbar = () => {
     const [cartCount, setCartCount] = useState(0);

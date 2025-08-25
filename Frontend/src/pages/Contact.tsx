@@ -1,7 +1,32 @@
+import { useState } from "react";
 import image from "../assets/hero-cart.jpg"
+import { submitContact } from "../store/slices/contactSlice";
+import type { AppDispatch } from "../store/store";
+import { useDispatch } from "react-redux";
 
 const Contact = () => {
+    const dispatch = useDispatch<AppDispatch>();
+    const [name, setName] = useState<string>('')
+    const [email, setEmail] = useState<string>('')
+    const [phone, setPhone] = useState<string>('')
+    const [message, setMessage] = useState<string>('')
 
+    async function handleSubmit() {
+        if (!name) {
+            alert("Please Enter Name")
+            return;
+        }
+        const contactData = {
+            id: Date.now().toString(),
+            name,
+            email,
+            phone,
+            message
+        };
+        await dispatch(submitContact(contactData));
+        alert("Contact submitted successfully!");
+
+    }
 
 
     return (
@@ -54,16 +79,16 @@ const Contact = () => {
                     <form className="m-10 w-full">
                         <div>
                             <h2 className='text-2xl font-bold'>Full Name</h2>
-                            <input id="email"  className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Name here*" />
+                            <input onChange={(e) => setName(e.target.value)} className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Name here*" />
                         </div>
                         <div>
                             <h2 className='text-2xl font-bold'>Email Address</h2>
-                            <input id="email" className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Email here*" />
+                            <input onChange={(e) => setEmail(e.target.value)} id="email" className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Email here*" />
                         </div>
 
                         <div>
                             <h2 className='text-2xl font-bold'>Phone Number</h2>
-                            <input id="phone"  className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Phone*" />
+                            <input onChange={(e) => setPhone(e.target.value)} id="phone" className="border p-2 text-xl w-4/6 my-5" type="text" placeholder="Phone*" />
 
                             <div className="flex flex-col md:flex-row  gap-5">
                                 <div className="border-2 border-black w-5/6 md:w-1/2">
@@ -93,9 +118,9 @@ const Contact = () => {
                                     <p className="font-semibold">Looking for an opportunity to increase your income or expand your business and offer your customers a wider selection of products. Why wait? Enquire today and find out more about this unique opportunity.</p>
                                 </div>
                             </div>
-                            <textarea  rows={6}  placeholder="Your Message*" className="border p-2 text-xl w-5/6 my-5" />
+                            <textarea rows={6} onChange={(e) => setMessage(e.target.value)} placeholder="Your Message*" className="border p-2 text-xl w-5/6 my-5" />
 
-                            <button type="button" className="btn btn-neutral hover:bg-success hover:border-none w-5/6 mt-5">
+                            <button onClick={handleSubmit} type="button" className="btn btn-neutral hover:bg-success hover:border-none w-5/6 mt-5">
                                 Submit
                             </button>
                         </div>
