@@ -44,13 +44,13 @@ const ProductDetail = () => {
                 <div className="skeleton h-4 w-full"></div>
             </div>) : (
                 <div className="flex flex-col md:flex-row gap-5">
-                    <div className="flex mx-auto w-4/6 md:w-1/3">
+                    <div className="flex mx-auto w-4/6 md:w-1/4 my-5">
                         <img src={product?.imageUrl} />
                     </div>
 
-                    <div className="border w-full md:w-1/2 p-5">
+                    <div className="w-full md:w-1/2 p-5">
                         <h2 className="text-5xl font-semibold my-5">{product?.title}</h2>
-                        <p className="text-xl font-semibold my-5">Price: ${product?.price}</p>
+                        <p className="text-xl font-semibold my-5">Price: ${product?.finalPrice}</p>
                         <p className="text-lg font-semibold">{product?.description}</p>
                         <p className="text-lg font-semibold my-5"> Availability: {product?.availableStock && product.availableStock > 0
                             ? product.availableStock

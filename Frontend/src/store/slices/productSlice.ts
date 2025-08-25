@@ -24,7 +24,7 @@ export const fetchProductById = createAsyncThunk(
 
 export const addProduct = createAsyncThunk(
   "products/add",
-  async (product: { title: string; description: string; price: number; finalPrice: number; availableStock: number; imageUrl: string }) => {
+  async (product: { title: string; description: string; category: string; price: number; finalPrice: number; availableStock: number; imageUrl: string }) => {
     const db = getFirestore(app);
     const docRef = await addDoc(collection(db, "products"), product);
     return { id: docRef.id, ...product };

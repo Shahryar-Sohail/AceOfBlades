@@ -10,6 +10,7 @@ const AdminPanel = () => {
     const dispatch = useDispatch<AppDispatch>();
     const [title, setTitle] = useState("")
     const [description, setDescription] = useState("")
+    const [category, setCategory] = useState("")
     const [price, setPrice] = useState("")
     const [finalPrice, setFinalPrice] = useState("")
     const [availableStock, setAvailableStock] = useState("")
@@ -37,6 +38,7 @@ const AdminPanel = () => {
         const productData = {
             title,
             description,
+            category,
             price: Number(price),
             finalPrice: Number(finalPrice),
             availableStock: Number(availableStock),
@@ -75,6 +77,7 @@ const AdminPanel = () => {
                         <form className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-6 w-full max-w-3xl">
                             <input onChange={e => setTitle(e.target.value)} value={title} type="text" placeholder="Title" className="input" />
                             <input onChange={e => setDescription(e.target.value)} value={description} type="text" placeholder="Description" className="input" />
+                            <input onChange={e => setCategory(e.target.value)} value={category} type="text" placeholder="Category" className="input" />
                             <input onChange={e => setPrice(e.target.value)} value={price} type="number" placeholder="Price" className="input" />
                             <input onChange={e => setFinalPrice(e.target.value)} value={finalPrice} type="number" placeholder="Final Price" className="input" />
                             <input onChange={e => setAvailableStock(e.target.value)} value={availableStock} type="number" placeholder="Available Stock" className="input" />
@@ -100,6 +103,7 @@ const AdminPanel = () => {
                                     <th>Image</th>
                                     <th>Title</th>
                                     <th>Description</th>
+                                    <th>Category</th>
                                     <th>Stock</th>
                                     <th>Price</th>
                                     <th>Final Price</th>
@@ -126,6 +130,9 @@ const AdminPanel = () => {
                                         </td>
                                         <td>
                                             {product.description}
+                                        </td>
+                                        <td>
+                                            {product.category}
                                         </td>
                                         <td>
                                             {product.availableStock}
