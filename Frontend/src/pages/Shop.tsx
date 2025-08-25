@@ -31,7 +31,7 @@ const Shop = () => {
                 <h1 className='text-white text-1xl font-bold'>HOME <span>&gt;&gt;</span> Shop</h1>
             </div>
 
-            <div className="flex flex-col md:flex-row justify-center items-center flex-wrap gap-5 m-10 max-w-[1200px] mx-auto">
+            <div className="flex flex-col md:flex-row justify-center items-center flex-wrap gap-5 m-10 max-w-[1200px] mx-auto dark:text-black">
 
                 <Link to={`/category/Uncategorized`}> <div className=" bg-base-100 w-64 shadow-lg overflow-hidden hover:scale-110 transition-transform duration-300 cursor-pointer">
                     <div

@@ -74,8 +74,8 @@ const Contact = () => {
                 </nav>
             </div>
 
-            <div className="max-w-[1200px] mx-auto ">
-                <div className="relative flex flex-col md:flex-row mx-auto z-10 -top-14 w-5/6 md:w-1/2 bg-white shadow-2xl">
+            <div className="max-w-[1200px] mx-auto">
+                <div className="relative flex flex-col md:flex-row mx-auto z-10 -top-14 w-5/6 md:w-1/2 bg-white shadow-2xl dark:bg-black">
                     {/* customer form  */}
                     <form className="m-10 w-full">
                         <div>
@@ -131,7 +131,7 @@ const Contact = () => {
                                         setTimeout(() => (btn.innerHTML = "Submit"), 1500);
                                         handleSubmit()
                                     }
-                                } type="button" className="btn btn-neutral hover:bg-success hover:border-none w-5/6 mt-5">
+                                } type="button" className="btn btn-neutral hover:bg-success hover:border-none w-5/6 mt-5 dark:bg-gray-500">
                                 Submit
                             </motion.button>
                         </div>

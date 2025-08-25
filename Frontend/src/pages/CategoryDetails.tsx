@@ -66,9 +66,9 @@ const CategoryDetails = () => {
             </div>
 
             {/* Cards Here below */}
-            <div className='p-10 flex flex-wrap gap-4 justify-center '>
+            <div className='p-10 flex flex-wrap gap-4 justify-center'>
                 {filteredProducts.map((product) => (
-                    <div key={product.id} >
+                    <div key={product.id}>
                         <Link to={`/pages/${product.id}`} className="card bg-base-100 w-80 shadow-sm">
 
                             <figure>
@@ -76,7 +76,7 @@ const CategoryDetails = () => {
                                     src={product.imageUrl}
                                     alt={product.title} className='w-80' />
                             </figure>
-                            <div className='border-2 border-black w-fit rounded-3xl p-2 absolute right-0 -top-2 hover:bg-black hover:text-white'>Sale</div>
+                            <div className='border-2 border-black w-fit rounded-3xl p-2 absolute right-0 -top-2 hover:bg-black hover:text-white dark:text-black'>Sale</div>
                         </Link>
 
                         <div className="card-body">

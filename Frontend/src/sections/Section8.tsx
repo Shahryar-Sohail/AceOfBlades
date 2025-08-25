@@ -52,15 +52,20 @@ const Section8 = () => {
             <div className="slider-container">
                 <Slider {...settings} >
                     {products.map((product) => (
-                        <div key={product.id} >
+                        <div key={product.id} className="hover:scale-105 transition-transform duration-300 cursor-pointer">
                             <img src={product.imageUrl} className="w-full md:w-3/4" />
                             <h1 className="text-xl font-semibold">{product.title}</h1>
                             <h1 className="font-semibold p-1">Rs {product.finalPrice}</h1>
                             <div className="flex items-center justify-center m-2">
                                 <motion.button
-                                    whileTap={{ scale: 0.9 }}
-                                    whileHover={{ scale: 1.05 }}
-                                    onClick={() => dispatch(addToCart({ ...product, quantity: 1 }))}
+                                    whileTap={{ scale: 0.1 }}
+                                    whileHover={{ scale: 1.15 }}
+                                    onClick={(e) => {
+                                        const btn = e.currentTarget;
+                                        btn.innerHTML = "✔ Added!";
+                                        setTimeout(() => (btn.innerHTML = "Add To Cart"), 1500);
+                                        dispatch(addToCart({ ...product, quantity: 1 }))
+                                    }}
                                     className="btn btn-neutral text-white rounded-3xl"
                                 >
                                     Add To Cart

@@ -122,7 +122,7 @@ const AdminPanel = () => {
                         <tbody>
                             {/* row 1 */}
                             {products.map(product =>
-                                <tr key={product.id}>
+                                <tr key={product.id} className="hover:scale-105 transition-transform duration-300 cursor-pointer">
                                     <td>
                                         <div className="flex items-center gap-3">
                                             <div className="avatar">

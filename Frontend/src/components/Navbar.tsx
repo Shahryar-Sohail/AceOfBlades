@@ -25,7 +25,7 @@ const Navbar = () => {
 
     return (
         <div className='w-[98%] sticky top-6 z-50 bg-white'>
-            <div className="navbar shadow-sm py-6  bg-white max-w-[1200px] mx-auto">
+            <div className="navbar shadow-sm py-6  bg-white max-w-[1200px] mx-auto dark:text-black">
                 {/* mobile navbar  */}
                 <div className="navbar-start">
                     <div className="dropdown">
