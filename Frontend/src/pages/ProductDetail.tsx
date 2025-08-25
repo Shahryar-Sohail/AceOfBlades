@@ -44,7 +44,7 @@ const ProductDetail = () => {
                 <div className="skeleton h-4 w-full"></div>
             </div>) : (
                 <div className="flex flex-col md:flex-row gap-5">
-                    <div className="flex mx-auto w-4/6 md:w-1/4 my-5">
+                    <div className="flex mx-auto w-4/6 md:w-1/4 my-6">
                         <img src={product?.imageUrl} />
                     </div>
 
