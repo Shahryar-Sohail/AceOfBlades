@@ -15,6 +15,7 @@ import ProductDetail from './pages/ProductDetail'
 import Contact from './pages/Contact'
 import Shop from './pages/Shop'
 import CategoryDetails from './pages/CategoryDetails'
+import Article from './pages/Article'
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           <Route path='/cart' element={<Cart />} />
           <Route path='/checkout' element={<Checkout />} />
           <Route path='/gallery' element={<Gallery />} />
+          <Route path='/article' element={<Article />} />
           <Route path='/pages/:id' element={<ProductDetail />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/shop' element={<Shop />} />

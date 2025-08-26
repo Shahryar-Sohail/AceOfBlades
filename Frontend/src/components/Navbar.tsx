@@ -19,13 +19,13 @@ const Navbar = () => {
             setCartCount(count);
         });
 
-        return () => unsubscribe(); 
+        return () => unsubscribe();
     }, []);
 
 
     return (
         <div className='w-[98%] sticky top-6 z-50 bg-white'>
-            <div className="navbar shadow-sm py-6  bg-white max-w-[1200px] mx-auto dark:text-black">
+            <div className="navbar shadow-sm py-6  bg-white max-w-[1200px] mx-auto dark:text-black ">
                 {/* mobile navbar  */}
                 <div className="navbar-start">
                     <div className="dropdown">
@@ -34,12 +34,12 @@ const Navbar = () => {
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-screen pr-10 -left-2 shadow text-xl">
+                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-screen pr-10 -left-2 shadow text-xl dark:bg-white">
                             <li><Link to="/">Home</Link></li>
                             <li>
                                 <details>
                                     <summary><Link to="/shop">AOB Collection</Link></summary>
-                                    <ul className="p-2 text-red-700 text-sm">
+                                    <ul className="p-2 text-red-700 text-sm ">
                                         <li className='flex flex-row items-center'>
                                             <img src={logoSmall} className='w-16' />
                                             <a>Uncategorized22 products</a>
@@ -76,7 +76,7 @@ const Navbar = () => {
                                 </details>
                             </li>
                             <li><Link to="/sale">On Sale</Link></li>
-                            <li><a>Articals</a></li>
+                            <li><Link to="/article">Articles</Link></li>
                             <li><Link to="/gallery">Gallery</Link></li>
                             <li><Link to="/cart">Cart</Link></li>
                             <li><Link to="/checkout">Checkout</Link></li>
@@ -140,7 +140,7 @@ const Navbar = () => {
                             </details>
                         </li>
                         <li><Link to='/sale'>On Sale</Link></li>
-                        <li><a>Articals</a></li>
+                        <li><Link to="/article">Articles</Link></li>
                         <li><Link to="/gallery">Gallery</Link></li>
                         <li><Link to="/cart">Cart</Link></li>
                         <li><Link to="/checkout">Checkout</Link></li>
