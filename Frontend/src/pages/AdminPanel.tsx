@@ -6,6 +6,7 @@ import type { RootState, AppDispatch } from "../store/store";
 import img from "../assets/customer.png";
 import { motion } from "motion/react"
 import Chart from "../components/Chart";
+import { useNavigate } from "react-router-dom";
 
 const AdminPanel = () => {
 
@@ -20,7 +21,7 @@ const AdminPanel = () => {
     const [showAddProduct, setShowAddProduct] = useState(false)
     const [editingId, setEditingId] = useState<string | null>(null);
 
-
+    const navigate = useNavigate();
 
     const { items: products = [] } = useSelector(
         (state: RootState) => state.products
@@ -29,6 +30,13 @@ const AdminPanel = () => {
     const { customer, cartItems, total, shippingCost } = useSelector(
         (state: RootState) => state.orders
     ) || {};
+
+    useEffect(() => {
+        const isAdmin = sessionStorage.getItem("isAdmin");
+        if (isAdmin !== "true") {
+            navigate("/login"); // kick non-admins
+        }
+    }, [navigate]);
 
 
     useEffect(() => {
@@ -339,8 +347,8 @@ const AdminPanel = () => {
 
                 {/* stock chart  */}
                 <div className="w-5/6 mx-auto h-[500px]  mb-24">
-                        <h1 className="text-3xl text-center my-10">Stock Chart</h1>
-                        <Chart />
+                    <h1 className="text-3xl text-center my-10">Stock Chart</h1>
+                    <Chart />
                 </div>
             </div >
         </div >

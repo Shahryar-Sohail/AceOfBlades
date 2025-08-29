@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import type { AppDispatch } from "../store/store"
-import { loginUser } from "../store/slices/authSlice"; 
+import { loginUser } from "../store/slices/authSlice";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -11,12 +11,19 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault(); 
+    e.preventDefault();
     try {
       const resultAction: any = await dispatch(loginUser({ email, password }));
       if (loginUser.fulfilled.match(resultAction)) {
-        // login success
-        navigate("/admin"); 
+        const user = resultAction.payload; // Firebase user object
+
+        if (user.email === "admin@gmail.com") {
+          sessionStorage.setItem("isAdmin", "true");
+          navigate("/admin");
+        } else {
+          sessionStorage.setItem("isAdmin", "false");
+          navigate("/");
+        }
       } else {
         alert("Login failed");
       }
