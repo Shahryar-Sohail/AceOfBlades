@@ -10,12 +10,13 @@ import {
     where,
     deleteDoc,
     doc,
-    onSnapshot
+    onSnapshot,
+    getDoc
 } from "firebase/firestore";
 import { app } from "../../firebase";
 
 interface CartItem {
-    id: string; 
+    id: string;
     title: string;
     price: number;
     quantity: number;
@@ -28,17 +29,19 @@ interface CartItem {
 
 interface CartState {
     items: CartItem[];
+    error: string | null;
 }
 
 const initialState: CartState = {
     items: [],
+    error: null,
 };
 
 export const listenCartCount = (callback: (count: number) => void) => {
-  const db = getFirestore(app);
-  return onSnapshot(collection(db, "cart"), (snapshot) => {
-    callback(snapshot.size);
-  });
+    const db = getFirestore(app);
+    return onSnapshot(collection(db, "cart"), (snapshot) => {
+        callback(snapshot.size);
+    });
 };
 
 export const addToCart = createAsyncThunk(
@@ -70,15 +73,36 @@ export const addToCart = createAsyncThunk(
 
 export const updateCartQuantity = createAsyncThunk(
     "cart/updateCartQuantity",
-    async ({ docId, quantity }: { docId: string; quantity: number }) => {
-        const db = getFirestore(app);
-        const ref = doc(db, "cart", docId);
+    async (
+        { docId, quantity }: { docId: string; quantity: number },
+        { rejectWithValue }
+    ) => {
+        try {
+            const db = getFirestore(app);
+            const ref = doc(db, "cart", docId);
 
-        await updateDoc(ref, { quantity });
+            const snapshot = await getDoc(ref);
+            if (!snapshot.exists()) {
+                return rejectWithValue("Product not found in cart");
+            }
 
-        return { docId, quantity };
+            const product = snapshot.data();
+
+            // check stock
+            if (quantity > product.availableStock) {
+                return rejectWithValue(" ❌ Out of stock");
+            }
+
+            // update only if within stock
+            await updateDoc(ref, { quantity });
+
+            return { docId, quantity };
+        } catch (error) {
+            return rejectWithValue("Something went wrong while updating cart")
+        }
     }
 );
+
 
 export const removeFromCartDB = createAsyncThunk(
     "cart/removeFromCartDB",
@@ -138,7 +162,12 @@ const cartSlice = createSlice({
             if (existing) {
                 existing.quantity = quantity;
             }
-        });
+        })
+            .addCase(updateCartQuantity.rejected, (state, action) => {
+                const errorMsg = action.payload || "❌ Out of stock";
+                state.error = errorMsg as string;
+                alert(errorMsg); // 👈 directly show popup
+            });
     },
 });
 

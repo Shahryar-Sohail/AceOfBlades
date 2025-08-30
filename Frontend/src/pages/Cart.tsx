@@ -118,7 +118,7 @@ const Cart = () => {
                                                     handleQuantityChange(product.id, Number(e.target.value))
                                                 }
                                                 className="bg-black text-white input input-bordered w-16 text-center"
-                                            />
+                                            /> <p>Stock: {product.availableStock-product.quantity}</p>
                                         </td>
                                         <td>{product.finalPrice}</td>
                                         <td>{product.finalPrice * product.quantity}</td>

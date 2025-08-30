@@ -66,7 +66,7 @@ const Checkout = () => {
                 quantity: item.quantity || 1,
                 price: item.price,
                 finalPrice: item.finalPrice,
-                availableStock: item.availableStock,
+                availableStock: item.availableStock - item.quantity,
             })),
             total,
             createdAt: new Date(),
