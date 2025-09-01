@@ -28,8 +28,6 @@ const initialState: CheckoutState = {
   status: "idle",
 };
 
-
-
 export const fetchCheckout = createAsyncThunk(
   "checkout/fetchCheckout",
   async () => {

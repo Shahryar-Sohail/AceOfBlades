@@ -15,8 +15,9 @@ const Section3 = () => {
                     </p>
                     <p className="text-lg mt-5">
                         The crafting process of each knife is a humble journey indeed, an experience we hope to share with you. Handcrafted by only the best, we believe each blade tells a story, captures a memory and holds the potential to add to your unique story. Made from only the finest Damascus, Carbon and stainless steel, our knives are perfect for the wild terrain or for the collection in the glass case.</p>
-                    <div className='flex w-full p-0'>
-                        <div className="card bg-base-100 w-80 shadow-sm">
+                    
+                    <div className='flex flex-col md:flex-row w-full p-0 items-center justify-center'>
+                        <div className="card bg-base-100 w-40 lg:w-80 shadow-sm">
                             <figure className="px-10 pt-10 ">
                                 <img
                                     src={fire}
@@ -28,7 +29,7 @@ const Section3 = () => {
                             </div>
                         </div>
 
-                        <div className="card bg-base-100 w-80 shadow-sm">
+                        <div className="card bg-base-100 w-40 lg:w-80 shadow-sm">
                             <figure className="px-10 pt-10 ">
                                 <img
                                     src={hands}
@@ -41,7 +42,7 @@ const Section3 = () => {
                         </div>
 
 
-                        <div className="card bg-base-100 w-80 shadow-sm">
+                        <div className="card bg-base-100 w-40 lg:w-80 shadow-sm">
                             <figure className="px-10 pt-10 ">
                                 <img
                                     src={finger}

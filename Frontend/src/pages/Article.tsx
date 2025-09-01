@@ -19,7 +19,7 @@ const Article = () => {
                             <div className="card-body p-0 mt-4">
                                 <h2 className="card-title text-3xl text-start font-bold">A Very Brief History of Damascus Steel</h2>
                                 <p className='text-md font-semibold text-start'>Traditional Damascus steel, also known as Pattern Weld, Damascene, or Damast, was first produced over two thousand years ago.</p>
-                                <button className="btn btn-soft text-white bg-black hover:bg-gray-300 hover:text-black hover:border-none rounded-none w-40 dark:text-black hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                <button className="btn btn-soft text-white bg-black hover:bg-gray-300 hover:text-black hover:border-none rounded-none w-40 dark:bg-white dark:text-black hover:scale-110 transition-transform duration-300 cursor-pointer">
                                     Read More
                                 </button>
                             </div>
@@ -34,7 +34,7 @@ const Article = () => {
                             <div className="card-body p-0 mt-4">
                                 <h2 className="card-title text-3xl text-start font-bold">How to care for a Damascus steel knife</h2>
                                 <p className='text-md font-semibold text-start'>Damascus is well-known for its contrasting marble light and dark designs made of different metals with unique properties.</p>
-                                <button className="btn btn-soft text-white bg-black hover:bg-gray-300 hover:text-black hover:border-none rounded-none w-40 dark:text-black hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                <button className="btn btn-soft text-white bg-black dark:bg-white  hover:bg-gray-300 hover:text-black hover:border-none rounded-none w-40 dark:text-black hover:scale-110 transition-transform duration-300 cursor-pointer">
                                     Read More
                                 </button>
                             </div>
@@ -49,7 +49,7 @@ const Article = () => {
                             <div className="card-body p-0 mt-4">
                                 <h2 className="card-title text-3xl text-start font-bold">Crafting Damascus Knives: Workshop</h2>
                                 <p className='text-md font-semibold text-start'>Every morning, I wake up early and make my way to my workshop on the farm. The sounds of roosters crowing fill the air, and I take a deep breath</p>
-                                <button className="btn btn-soft text-white bg-black hover:bg-gray-300 hover:text-black hover:border-none rounded-none w-40 dark:text-black hover:scale-110 transition-transform duration-300 cursor-pointer">
+                                <button className="btn btn-soft text-white bg-black dark:bg-white  hover:bg-gray-300 hover:text-black hover:border-none rounded-none w-40 dark:text-black hover:scale-110 transition-transform duration-300 cursor-pointer">
                                     Read More
                                 </button>
                             </div>
