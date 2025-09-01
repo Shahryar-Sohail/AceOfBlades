@@ -118,14 +118,14 @@ const Cart = () => {
                                                     handleQuantityChange(product.id, Number(e.target.value))
                                                 }
                                                 className="bg-black text-white input input-bordered w-16 text-center"
-                                            /> <p>Stock: {product.availableStock-product.quantity}</p>
+                                            /> <p>Stock: {product.availableStock - product.quantity}</p>
                                         </td>
                                         <td>{product.finalPrice}</td>
                                         <td>{product.finalPrice * product.quantity}</td>
                                         <td>
                                             <motion.button
-                                                whileTap={{ scale: 0.1 }}
-                                                whileHover={{ scale: 1.15 }}
+                                                whileTap={{ scale: 0.9 }}
+                                                whileHover={window.innerWidth > 768 ? { scale: 1.05 } : undefined}
                                                 onClick={(e) => {
                                                     const btn = e.currentTarget;
                                                     btn.innerHTML = "❌Removed";

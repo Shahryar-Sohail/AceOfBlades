@@ -59,8 +59,8 @@ const Sale = ({ showHeader = true }: SaleProps) => {
               <p className='text-sm font-semibold'>RS {product.finalPrice} <span className='line-through'>RS {product.price}</span></p>
               <div className="card-actions justify-center">
                 <motion.button
-                  whileTap={{ scale: 0.1 }}
-                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.9 }}
+                  whileHover={window.innerWidth > 768 ? { scale: 1.05 } : undefined}
                   onClick={(e) => {
                     const btn = e.currentTarget;
                     btn.innerHTML = "✔ Added!";

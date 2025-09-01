@@ -58,8 +58,8 @@ const Section8 = () => {
                             <h1 className="font-semibold p-1">Rs {product.finalPrice}</h1>
                             <div className="flex items-center justify-center m-2">
                                 <motion.button
-                                    whileTap={{ scale: 0.1 }}
-                                    whileHover={{ scale: 1.15 }}
+                                    whileTap={{ scale: 0.9 }}
+                                    whileHover={window.innerWidth > 768 ? { scale: 1.05 } : undefined}
                                     onClick={(e) => {
                                         const btn = e.currentTarget;
                                         btn.innerHTML = "✔ Added!";

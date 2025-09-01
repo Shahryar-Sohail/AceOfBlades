@@ -6,7 +6,7 @@ const Article = () => {
     return (
         <div>
             <div>
-                <div className=" p-4 md:p-10  max-w-[1200px] mx-auto">
+                <div className=" p-4 md:p-10  max-w-[1200px] mx-asuto">
             
                     <div className='grid md:flex content-center justify-center items-center'>
                         <div className="card bg-transparent w-5/6 mx-auto sm:w-96 shadow-sm mr-10 ">
