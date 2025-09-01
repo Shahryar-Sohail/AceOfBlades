@@ -1,6 +1,12 @@
 # 🛒 Ace of Blades  
 
-I have created a full-featured **E-Commerce Project** using ⚛️ React JS, 🎨 Tailwind CSS, 🌸 Daisy UI, and 🔥 Firebase.  
+I have created a full-featured **E-Commerce Project** using 
+⚛️ React JS 
+🎨 Tailwind CSS
+🌸 Daisy UI
+📜TypeScript
+📈Chart.js 
+🔥 Firebase  
 
 ## ✨ Features
 - 🛍️ Add to Cart  
