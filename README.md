@@ -27,3 +27,4 @@ npm i
 npm run dev
 ```
 ![ScreenShot](./fullScreenShot.jpg)
+![ScreenShot](./adminPanel.png)
