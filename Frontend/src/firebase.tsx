@@ -10,12 +10,12 @@ const FirebaseContext = createContext<FirebaseContextType | any>(null);
 export const useFirebase = () => useContext(FirebaseContext);
 
 const firebaseConfig = {
-  apiKey: "AIzaSyDJmBXN06mGvMz6Mu_1OCtw3rqa7NhG5GE",
-  authDomain: "theaceofblades-97a30.firebaseapp.com",
-  projectId: "theaceofblades-97a30",
-  storageBucket: "theaceofblades-97a30.firebasestorage.app",
-  messagingSenderId: "116011594266",
-  appId: "1:116011594266:web:412e5dbb13d7218a5257a3"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
 };
 
 // Initialize Firebase
